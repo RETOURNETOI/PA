@@ -1,0 +1,76 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+body {
+  font-family: 'Orbitron', sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+header {
+  background: linear-gradient(to right, #007bff, #6610f2);
+}
+
+header h1, header p {
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 1rem;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+  font-size: 1.4rem;
+}
+
+footer {
+  background-color: #212529;
+}
+
+/* Boutons personnalisés */
+.btn-outline-primary {
+  border-radius: 20px;
+}
+
+.btn-outline-danger {
+  border-radius: 20px;
+}
+
+.btn-outline-success {
+  border-radius: 20px;
+}
+
+.btn-primary {
+  background-color: #6610f2;
+  border: none;
+  border-radius: 20px;
+}
+
+.btn-outline-light {
+  border-radius: 20px;
+}
+
+/* Avatar hover */
+img.rounded-circle:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* Responsive tweaks */
+@media (max-width: 767px) {
+  header h1 {
+    font-size: 2rem;
+  }
+}
