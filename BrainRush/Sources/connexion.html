@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connexion - BrainRush</title>
+
+  <!-- Bootstrap + styles globaux -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/connexion.css">
+</head>
+<body class="light-background">
+
+  <!-- NAVBAR identique à index.html -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="../index.html">🧠 BrainRush</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="../traitement/traitement_index/traitement_index.php?page=quizz_solo">Quizz Solo</a></li>
+          <li class="nav-item"><a class="nav-link" href="../traitement/traitement_index/traitement_index.php?page=vs">VS</a></li>
+          <li class="nav-item"><a class="nav-link" href="../traitement/traitement_index/traitement_index.php?page=classement">Classement</a></li>
+          <li class="nav-item"><a class="nav-link" href="../traitement/traitement_index/traitement_index.php?page=tournois">Tournois</a></li>
+          <li class="nav-item"><a class="nav-link" href="../traitement/traitement_index/traitement_index.php?page=forum">Forum</a></li>
+        </ul>
+
+        <div class="d-flex gap-2">
+          <a href="../traitement/traitement_index/traitement_index.php?page=connexion" class="btn btn-outline-light btn-sm">Connexion</a>
+          <a href="../traitement/traitement_index/traitement_index.php?page=inscription" class="btn btn-primary btn-sm">Inscription</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- FORMULAIRE DE CONNEXION -->
+  <div class="connexion-wrapper">
+    <div class="login-container">
+      <h2>🔐 Connexion</h2>
+      <form id="loginForm">
+        <input type="email" name="email" placeholder="Adresse email" required>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+      </form>
+    </div>
+    <button id="evil-button">Connexion</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/connexion.js"></script>
+</body>
+</html>

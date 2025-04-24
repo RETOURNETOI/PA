@@ -20,6 +20,93 @@ header h1, header p {
   font-size: 1.5rem;
 }
 
+
+
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 40px;
+  margin-top: 40px;
+  height: auto;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Avatars positionnés au-dessus de la marche */
+.step .avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ccc;
+  background: white;
+  margin-bottom: 10px; /* base spacing */
+}
+
+/* Personnalisation du décalage selon le rang */
+.step.first .avatar img {
+  margin-bottom: 30px; /* 🥇 le plus haut */
+}
+
+.step.second .avatar img {
+  margin-bottom: 20px; /* 🥈 moyen */
+}
+
+.step.third .avatar img {
+  margin-bottom: 10px; /* 🥉 plus bas */
+}
+
+/* Marche du podium */
+.step .block {
+  width: 70px;
+  background-color: #ffc107;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5rem;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.step.first .block {
+  height: 160px;
+  background-color: gold;
+}
+
+.step.second .block {
+  height: 120px;
+  background-color: silver;
+}
+
+.step.third .block {
+  height: 100px;
+  background-color: #cd7f32;
+}
+
+/* Infos sous la marche */
+.step .info {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.step .pseudo {
+  font-weight: bold;
+  margin: 0;
+}
+
+.step .points {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
 .card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 1rem;
@@ -73,4 +160,118 @@ img.rounded-circle:hover {
   header h1 {
     font-size: 2rem;
   }
+}
+
+#chatbot-bubble {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+#chatbot-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#chatbot-box {
+  width: 300px;
+  height: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#chatbot-box.hidden {
+  display: none;
+}
+
+#chatbot-header {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#chatbox {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+}
+
+.input-area {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 5px;
+  font-size: 0.9rem;
+}
+
+.input-area button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  background: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Mode sombre pour le chatbot */
+body.dark-mode #chatbot-box {
+  background: #384454 !important;
+  color: white;
+}
+
+body.dark-mode #chatbot-header {
+  background: linear-gradient(to right, #DA7B27, #D7572B) !important;
+  color: white;
+}
+
+body.dark-mode .input-area {
+  background: #2f3a4a !important;
+  border-top: 1px solid #555;
+}
+
+body.dark-mode .input-area input {
+  background: #3f4a5a;
+  color: white;
+  border: 1px solid #555;
+}
+
+/* Mode sombre activé */
+body.dark-mode {
+  background-color: #384454 !important;
+  color: #eeeeee !important;
+}
+
+body.dark-mode .navbar, 
+body.dark-mode footer, 
+body.dark-mode .card, 
+body.dark-mode .input-area, 
+body.dark-mode .section, 
+body.dark-mode .modal-content {
+  background-color: #384454 !important;
+  color: #fff !important;
+  border-color: #333 !important;
+}
+
+body.dark-mode header {
+  background: linear-gradient(to right, #DA7B27, #D7572B) !important;
+  color: white !important;
 }
