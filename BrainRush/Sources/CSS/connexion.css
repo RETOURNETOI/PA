@@ -1,5 +1,7 @@
-/* Wrapper de centrage */
-.connexion-wrapper {
+/* =============================
+   WRAPPER DE LA PAGE
+   ============================= */
+   .connexion-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,10 +9,14 @@
     min-height: 100vh;
     padding-top: 100px;
     padding-bottom: 100px;
-    background: linear-gradient(to bottom right, #f4f7ff, #e8efff);
+    background: var(--wrapper-bg, linear-gradient(to bottom right, #f4f7ff, #e8efff));
+    position: relative;
+    overflow: hidden;
   }
   
-  /* Conteneur du formulaire */
+  /* =============================
+     CONTAINER DU FORMULAIRE
+     ============================= */
   .login-container {
     background: white;
     padding: 40px 30px;
@@ -18,16 +24,10 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     width: 350px;
     text-align: center;
+    z-index: 2;
     position: relative;
-    z-index: 1;
-    transition: transform 0.3s ease;
   }
   
-  .login-container:hover {
-    transform: translateY(-3px);
-  }
-  
-  /* Titre */
   .login-container h2 {
     font-weight: 700;
     font-size: 1.6rem;
@@ -35,7 +35,6 @@
     color: #222;
   }
   
-  /* Champs de saisie */
   .login-container input {
     width: 100%;
     padding: 12px 16px;
@@ -44,6 +43,12 @@
     border: 1px solid #ccc;
     font-size: 1rem;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: white;
+    color: #222;
+  }
+  
+  .login-container input::placeholder {
+    color: #666;
   }
   
   .login-container input:focus {
@@ -52,7 +57,37 @@
     outline: none;
   }
   
-  /* Bouton fuyant */
+  /* =============================
+     TEXTE LIEN INSCRIPTION
+     ============================= */
+  .inscription-link {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
+    background: linear-gradient(to right, #007bff, #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+  
+  .inscription-link a {
+    text-decoration: underline;
+    color: inherit;
+  }
+  
+  body.dark-mode .inscription-link {
+    background: linear-gradient(to right, #DA7B27, #D7572B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+  
+  /* =============================
+     BOUTON « EVIL » DE CONNEXION
+     ============================= */
   #evil-button {
     width: 200px;
     padding: 12px;
@@ -63,36 +98,63 @@
     font-size: 1.1rem;
     font-weight: 500;
     cursor: pointer;
-    position: fixed;
-    z-index: 1000;
     transition: all 0.3s ease;
+    position: fixed;
     left: 50%;
     top: 70%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    z-index: 1000;
+    max-width: calc(100% - 40px);
+    max-height: 90vh;
   }
   
   #evil-button:hover {
     background-color: #0056b3;
   }
   
-  /* Responsive */
-  @media (max-width: 576px) {
-    .login-container {
-      width: 90%;
-      padding: 20px;
-    }
+  /* =============================
+     DARK MODE
+     ============================= */
+  body.dark-mode {
+    background-color: #2c2f3a !important;
+    color: #eeeeee !important;
+  }
   
+  body.dark-mode .connexion-wrapper {
+    background: #2c2f3a !important;
+  }
+  
+  body.dark-mode .login-container {
+    background-color: #384454 !important;
+    color: white !important;
+    border-color: #333 !important;
+  }
+  
+  body.dark-mode .login-container h2 {
+    color: #ffffff !important;
+  }
+  
+  body.dark-mode .login-container input {
+    background-color: #4a5568 !important;
+    color: #ffffff !important;
+    border: 1px solid #555 !important;
+  }
+  
+  body.dark-mode .login-container input::placeholder {
+    color: #dddddd !important;
+  }
+  
+  body.dark-mode #evil-button {
+    background-color: #DA7B27 !important;
+    color: white;
+  }
+  
+  /* Empêcher le bouton de sortir de la fenêtre */
+  @media (max-width: 420px) {
     #evil-button {
-      width: 180px;
-      font-size: 1rem;
+      max-width: 90%;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      max-height: 90vh;
     }
-
-    @media (max-width: 576px) {
-        #evil-button {
-          margin-top: 16px;
-        }
-    }      
-}
-
-  
+  }

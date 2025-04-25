@@ -1,100 +1,143 @@
+// ✅ Connexion.js avec dark mode, langue, sécurité du bouton, toute la phrase d'inscription cliquable et avatar ajouté dans le header
+
 const evilButton = document.getElementById('evil-button');
 const OFFSET = 100;
 const SPEED = 300;
-
 let isFormValid = false;
+let lang = 'fr';
 
-// Met à jour le texte du bouton
-evilButton.textContent = 'Connexion';
-
-// Fonction pour déplacer le bouton
-document.addEventListener('mousemove', (e) => {
-  if (isFormValid) return; // Si le formulaire est rempli, ne pas bouger
-
-  const x = e.pageX;
-  const y = e.pageY;
-  const buttonBox = evilButton.getBoundingClientRect();
-
-  const horizontalDistanceFrom = distanceFromCenter(buttonBox.x, x, buttonBox.width);
-  const verticalDistanceFrom = distanceFromCenter(buttonBox.y, y, buttonBox.height);
-  const horizontalOffset = buttonBox.width / 2 + OFFSET;
-  const verticalOffset = buttonBox.height / 2 + OFFSET;
-
-  if (Math.abs(horizontalDistanceFrom) <= horizontalOffset && Math.abs(verticalDistanceFrom) <= verticalOffset) {
-    setButtonPosition(
-      buttonBox.x + horizontalOffset / horizontalDistanceFrom * SPEED,
-      buttonBox.y + verticalOffset / verticalDistanceFrom * SPEED
-    );
+const translations = {
+  fr: {
+    title: "🔐 Connexion",
+    email: "Adresse email",
+    password: "Mot de passe",
+    button: "Connexion",
+    signupLine: "<a href=\"traitement_index.php?page=inscription\">Vous n'avez pas de compte ? Inscrivez-vous</a>"
+  },
+  en: {
+    title: "🔐 Login",
+    email: "Email address",
+    password: "Password",
+    button: "Login",
+    signupLine: "<a href=\"traitement_index.php?page=inscription\">Don't have an account? Sign up</a>"
   }
-});
+};
 
-// Repositionne le bouton au centre
-function moveButtonToCenter() {
-    const formBox = document.querySelector('.login-container').getBoundingClientRect();
-    const buttonBox = evilButton.getBoundingClientRect();
-  
-    // Centrage horizontal par rapport au bloc
-    const centerX = formBox.left + formBox.width / 2 - buttonBox.width / 2;
-  
-    // Centrage vertical sous le bloc MAIS contraint dans la fenêtre
-    const targetY = Math.min(
-      formBox.bottom + 24,
-      window.innerHeight - buttonBox.height - 24
-    );
-  
-    evilButton.style.transition = 'left 0.3s ease, top 0.3s ease';
-    evilButton.style.left = `${centerX}px`;
-    evilButton.style.top = `${targetY}px`;
+const title = document.getElementById("title");
+const emailInput = document.getElementById("emailInput");
+const passwordInput = document.getElementById("passwordInput");
+const signupLine = document.getElementById("signupLine");
+
+const langToggle = document.getElementById('langToggle');
+if (langToggle) {
+  langToggle.addEventListener('click', () => {
+    lang = lang === 'fr' ? 'en' : 'fr';
+    const t = translations[lang];
+    title.textContent = t.title;
+    emailInput.placeholder = t.email;
+    passwordInput.placeholder = t.password;
+    evilButton.textContent = t.button;
+    signupLine.innerHTML = t.signupLine;
+    langToggle.querySelector('img').src = lang === 'fr' ? 'assets/drapeau_fr.png' : 'assets/drapeau_en.png';
+  });
 }
-  
 
-// Vérifie les champs du formulaire
-document.querySelector('form').addEventListener('input', () => {
-  const email = document.querySelector('input[name="email"]').value.trim();
-  const password = document.querySelector('input[name="password"]').value.trim();
+const themeToggle = document.getElementById("themeToggle");
+const body = document.body;
+const nav = document.querySelector("nav.navbar");
+const container = document.querySelector(".login-container");
 
-  if (email !== '' && password !== '') {
-    isFormValid = true;
-    moveButtonToCenter();
+function applyTheme(theme) {
+  if (theme === "dark") {
+    body.classList.add("dark-mode");
+    body.classList.remove("light-background");
+    if (nav) nav.style.background = "linear-gradient(to right, #DA7B27, #D7572B)";
+    if (container) {
+      container.style.backgroundColor = "#384454";
+      container.style.color = "#fff";
+    }
+    evilButton.style.backgroundColor = "#DA7B27";
   } else {
-    isFormValid = false;
+    body.classList.remove("dark-mode");
+    body.classList.add("light-background");
+    if (nav) nav.style.background = "linear-gradient(to right, #007bff, #6610f2)";
+    if (container) {
+      container.style.backgroundColor = "white";
+      container.style.color = "#222";
+    }
+    evilButton.style.backgroundColor = "#007bff";
   }
-});
+}
 
-// Action quand on clique dessus
-evilButton.addEventListener('click', () => {
-  if (!isFormValid) {
-    alert('Remplis le formulaire d\'abord 😜');
-    return;
-  }
+let currentTheme = localStorage.getItem("theme") || "light";
+applyTheme(currentTheme);
 
-  alert('Connexion réussie ✅');
-  // Tu peux ici appeler form.submit() ou rediriger l’utilisateur
-});
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    currentTheme = currentTheme === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", currentTheme);
+    applyTheme(currentTheme);
+  });
+}
 
-// Aide à calculer la distance
 function distanceFromCenter(boxPosition, mousePosition, boxSize) {
   return boxPosition - mousePosition + boxSize / 2;
 }
 
 function setButtonPosition(left, top) {
-  const windowBox = document.body.getBoundingClientRect();
-  const buttonBox = evilButton.getBoundingClientRect();
+  const maxLeft = window.innerWidth - evilButton.offsetWidth;
+  const maxTop = window.innerHeight - evilButton.offsetHeight;
 
-  if (distanceFromCenter(left, windowBox.left, buttonBox.width) < 0) {
-    left = windowBox.right - buttonBox.width - OFFSET;
-  }
-  if (distanceFromCenter(left, windowBox.right, buttonBox.width) > 0) {
-    left = windowBox.left + OFFSET;
-  }
-
-  if (distanceFromCenter(top, windowBox.top, buttonBox.height) < 0) {
-    top = windowBox.bottom - buttonBox.height - OFFSET;
-  }
-  if (distanceFromCenter(top, windowBox.bottom, buttonBox.height) > 0) {
-    top = windowBox.top + OFFSET;
-  }
+  left = Math.max(0, Math.min(left, maxLeft));
+  top = Math.max(0, Math.min(top, maxTop));
 
   evilButton.style.left = `${left}px`;
   evilButton.style.top = `${top}px`;
+  evilButton.style.transform = 'none';
 }
+
+document.addEventListener('mousemove', (e) => {
+  if (isFormValid) return;
+
+  const x = e.pageX;
+  const y = e.pageY;
+  const box = evilButton.getBoundingClientRect();
+
+  const dx = distanceFromCenter(box.x, x, box.width);
+  const dy = distanceFromCenter(box.y, y, box.height);
+  const hx = box.width / 2 + OFFSET;
+  const hy = box.height / 2 + OFFSET;
+
+  if (Math.abs(dx) <= hx && Math.abs(dy) <= hy) {
+    let newLeft = box.x + hx / dx * SPEED;
+    let newTop = box.y + hy / dy * SPEED;
+    setButtonPosition(newLeft, newTop);
+  }
+});
+
+function centerButton() {
+  const formBox = document.querySelector('.login-container').getBoundingClientRect();
+  const box = evilButton.getBoundingClientRect();
+
+  let centerX = formBox.left + formBox.width / 2 - box.width / 2;
+  let targetY = formBox.bottom + 24;
+
+  setButtonPosition(centerX, targetY);
+}
+
+document.getElementById('loginForm').addEventListener('input', () => {
+  if (emailInput.value.trim() && passwordInput.value.trim()) {
+    isFormValid = true;
+    centerButton();
+  } else {
+    isFormValid = false;
+  }
+});
+
+evilButton.addEventListener('click', () => {
+  if (!isFormValid) {
+    alert("Remplis le formulaire d'abord 😜");
+  } else {
+    alert("Connexion réussie ✅");
+  }
+});
