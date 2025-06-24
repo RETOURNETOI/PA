@@ -1,0 +1,276 @@
+/* === index.css === */
+
+/* Typo spécifique */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #f8f9fa;
+}
+
+header h1,
+header p {
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Section podium */
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Avatars podium */
+.step .avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ccc;
+  background: white;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.step .avatar img:hover {
+  transform: scale(1.05);
+}
+
+.step.first .avatar img {
+  margin-bottom: 30px;
+}
+
+.step.second .avatar img {
+  margin-bottom: 20px;
+}
+
+.step.third .avatar img {
+  margin-bottom: 10px;
+}
+
+/* Marches */
+.step .block {
+  width: 70px;
+  background-color: #ffc107;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5rem;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.step.first .block {
+  height: 160px;
+  background-color: gold;
+}
+
+.step.second .block {
+  height: 120px;
+  background-color: silver;
+}
+
+.step.third .block {
+  height: 100px;
+  background-color: #cd7f32;
+}
+
+/* Infos joueurs */
+.step .info {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.step .pseudo {
+  font-weight: bold;
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.step .points {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Cartes */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.card-title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.btn-outline-primary {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+body.dark-mode .btn-outline-primary {
+  border-color: var(--light-orange);
+  color: var(--light-orange);
+}
+
+body.dark-mode .btn-outline-primary:hover {
+  background-color: var(--light-orange);
+  color: white;
+}
+
+.btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-outline-success {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+:root {
+  --navbar-primary: #4f46e5;
+  --navbar-secondary: #7c3aed;
+}
+
+body.dark-mode {
+  --navbar-primary: #c2410c;
+  --navbar-secondary: #ea580c;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.py-5 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.display-4 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+.bg-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+body.dark-mode .bg-primary {
+  background: linear-gradient(135deg, var(--dark-orange), var(--light-orange));
+}
+
+.bg-dark {
+  background-color: #212529 !important;
+}
+
+.text-white {
+  color: white !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.g-4 {
+  gap: 1.5rem;
+}
+
+.col-md-4 {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media (max-width: 768px) {
+  .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .podium {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .step {
+    flex-direction: row;
+    gap: 20px;
+  }
+  
+  .step .block {
+    width: 50px;
+    height: 80px !important;
+    border-radius: 10px;
+  }
+  
+  .step.first .avatar img {
+    margin-bottom: 10px;
+  }
+}

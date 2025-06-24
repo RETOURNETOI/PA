@@ -1,0 +1,58 @@
+Projet BrainRush
+
+QuizMaster est une application web de quiz interactive, 
+pensée pour offrir une expérience ludique, 
+compétitive et sociale autour de la culture générale.
+
+Que vous souhaitiez vous entraîner en solo, 
+affronter vos amis en duel ou participer à des tournois en ligne, 
+tout est prévu pour vous divertir tout en vous challengeant !
+
+Fonctionnalités principales
+
+Modes de jeu : 
+- Solo : Entraînez-vous à votre rythme sur une grande variété de quiz.
+
+- Versus (VS) : Défiez vos amis ou d_autres joueurs en ligne, en quasi temps réel.
+
+- Tournois : Participez à des tournois en ligne compétitifs organisés régulièrement.
+
+Système de points & classement :
+- Gagnez des points à chaque session de jeu.
+
+- Un classement général est accessible après avoir terminé 10 sessions.
+
+Fonctionnalités sociales :
+- Forum : Discutez avec la communauté, échangez sur les quiz, les astuces ou proposez vos idées.
+
+- Messagerie privée : Envoyez des messages à vos amis (après acceptation de la demande).
+
+- ChatBot : Gèrez facilement vos demandes d’amis et vos MP via une interface conversationnelle intégrée.
+
+Stack technique : 
+
+Frontend : HTML / CSS / JS
+
+Backend : PHP
+
+Temps réel : Autre
+
+Base de données : MySQL
+
+Objectifs du projet
+- Proposer une plateforme complète de quiz pour tous les niveaux.
+
+- Favoriser l’apprentissage par le jeu et la compétition amicale.
+
+- Mettre en place une infrastructure de jeu en ligne stable et fluide.
+
+- Offrir un environnement communautaire grâce au forum et à la messagerie.
+
+Équipe de développement
+Ce projet est développé par :
+
+Kevin COLMEIRO
+
+Kevin HU
+
+Lancelot BRAHMI
