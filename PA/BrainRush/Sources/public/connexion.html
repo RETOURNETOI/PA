@@ -74,6 +74,26 @@
     <button id="evil-button">Connexion</button>
         </div>
     </div>
+    <div id="captcha-popup" class="captcha-popup">
+      <div class="captcha-content">
+        <span class="close-captcha">&times;</span>
+      <div class="wrapper">
+        <header>Vérification CAPTCHA</header>
+        <div class="captcha-area">
+          <div class="captcha-img">
+            <img src="../assets/captcha-bg.png" alt="Captch Background">
+            <span class="captcha"></span>
+          </div>
+          <button class="reload-btn"><i class="fas fa-redo-alt"></i></button>
+        </div>
+        <form class="input-area">
+          <input type="text" placeholder="Enter captcha" maxlength="6" spellcheck="false" required>
+          <button class="check-btn">Vérifier</button>
+        </form>
+        <div class="status-text"></div>
+      </div>
+    </div>
+  </div>
 
     <script src="../JS/connexion.js"></script>
     <script src="../JS/chatbot.js"></script>

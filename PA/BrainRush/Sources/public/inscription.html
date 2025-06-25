@@ -65,7 +65,7 @@
         </form>
         
         <div class="connexion-link">
-          <p>Déjà un compte ? <a href="connexion.html">Se connecter</a></p>
+          <p>Déjà un compte ? <a href="../traitement/routeur/routeur.php?page=connexion">Se connecter</a></p>
         </div>
       </div>
     </div>
@@ -82,6 +82,26 @@
     <button id="chatbot-icon" class="chatbot-open-button">
       💬
     </button>
+    <div id="captcha-popup" class="captcha-popup">
+      <div class="captcha-content">
+        <span class="close-captcha">&times;</span>
+        <div class="wrapper">
+          <header>Vérification CAPTCHA</header>
+          <div class="captcha-area">
+            <div class="captcha-img">
+              <img src="../assets/captcha-bg.png" alt="Captch Background">
+              <span class="captcha"></span>
+            </div>
+            <button class="reload-btn"><i class="fas fa-redo-alt"></i></button>
+          </div>
+          <form class="input-area">
+            <input type="text" placeholder="Enter captcha" maxlength="6" spellcheck="false" required>
+            <button class="check-btn">Vérifier</button>
+          </form>
+          <div class="status-text"></div>
+        </div>
+      </div>
+    </div>
 
     <script src="../JS/inscription.js"></script>
     <script src="../JS/chatbot.js"></script>

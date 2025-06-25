@@ -151,3 +151,78 @@ evilButton.addEventListener('click', () => {
     alert("Connexion réussie ✅");
   }
 });
+
+const captchaPopup = document.getElementById('captcha-popup');
+const closeCaptcha = document.querySelector('.close-captcha');
+const captchaForm = document.querySelector('.captcha-popup .input-area');
+let isCaptchaValid = false;
+
+function showCaptcha() {
+  captchaPopup.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function hideCaptcha() {
+  captchaPopup.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+closeCaptcha.addEventListener('click', hideCaptcha);
+
+captchaPopup.addEventListener('click', function(e) {
+  if (e.target === captchaPopup) {
+    hideCaptcha();
+  }
+});
+
+evilButton.addEventListener('click', function(e) {
+  e.preventDefault();
+  
+  if (!areFieldsFilled()) {
+    return;
+  }
+  
+  if (!isCaptchaValid) {
+    showCaptcha();
+    return;
+  }
+  
+  loginForm.submit();
+});
+
+document.querySelector('.inscription-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  if (!isCaptchaValid) {
+    showCaptcha();
+    return;
+  }
+  
+  this.submit();
+});
+
+captchaForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const inputVal = this.querySelector('input').value.split('').join(' ');
+  const captchaText = document.querySelector('.captcha-popup .captcha').innerText;
+  
+  if (inputVal === captchaText) {
+    document.querySelector('.captcha-popup .status-text').style.display = "block";
+    document.querySelector('.captcha-popup .status-text').style.color = "#06c59c";
+    document.querySelector('.captcha-popup .status-text').innerText = "Vérification réussie!";
+    
+    isCaptchaValid = true;
+    setTimeout(() => {
+      hideCaptcha();
+      if (document.getElementById('loginForm')) {
+        document.getElementById('loginForm').submit();
+      } else if (document.querySelector('.inscription-form')) {
+        document.querySelector('.inscription-form').submit();
+      }
+    }, 1000);
+  } else {
+    document.querySelector('.captcha-popup .status-text').style.display = "block";
+    document.querySelector('.captcha-popup .status-text').style.color = "#ff0000";
+    document.querySelector('.captcha-popup .status-text').innerText = "CAPTCHA incorrect. Veuillez réessayer!";
+  }
+});

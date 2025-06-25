@@ -194,3 +194,65 @@ body.dark-mode .connexion-link a {
     font-size: 1.4rem;
   }
 }
+
+.captcha-popup {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.captcha-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  animation: popupFadeIn 0.3s;
+}
+
+.close-captcha {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close-captcha:hover {
+  color: #333;
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.captcha-popup .wrapper {
+  box-shadow: none;
+  padding: 15px;
+}
+
+.captcha-popup .wrapper header {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.captcha-popup .captcha-area {
+  margin: 20px 0;
+}
