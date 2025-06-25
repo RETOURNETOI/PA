@@ -4,7 +4,7 @@
 // Liste des pages autorisées
 $routes = [
     'quizz_solo'  => 'public/quizz_solo.html',
-    'vs'          => 'public/vs.html',
+    'vs'          => 'public/VS.html',
     'classement'  => 'public/classement.html',
     'tournois'    => 'public/tournois.html',
     'forum'       => 'public/forum.html',
