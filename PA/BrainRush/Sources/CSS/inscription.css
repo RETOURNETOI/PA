@@ -1,145 +1,207 @@
-   .connexion-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    background: var(--wrapper-bg, linear-gradient(to bottom right, #f4f7ff, #e8efff));
-    position: relative;
-    overflow: hidden;
+/* === inscription.css - Styles spécifiques à l'inscription === */
+
+/* ===== Wrapper principal ===== */
+.inscription-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 120px 20px 40px;
+  background: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== Conteneur du formulaire ===== */
+.signin-container {
+  background: white;
+  padding: 40px 35px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+  border: 1px solid rgba(0, 123, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.signin-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Titre ===== */
+.signin-container h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #222;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Formulaire ===== */
+.inscription-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  position: relative;
+}
+
+.signin-container input {
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 2px solid #e1e5e9;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+}
+
+.signin-container input::placeholder {
+  color: #6c757d;
+  font-weight: 400;
+}
+
+.signin-container input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+  outline: none;
+  background-color: white;
+  transform: translateY(-2px);
+}
+
+.signin-container input:valid {
+  border-color: #28a745;
+}
+
+/* ===== Bouton d'inscription ===== */
+.signin-container .btn {
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.signin-container .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Lien de connexion ===== */
+.connexion-link {
+  margin-top: 25px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.connexion-link a {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.connexion-link a:hover {
+  text-decoration: underline;
+  transform: scale(1.02);
+}
+
+/* ===== Mode sombre ===== */
+body.dark-mode .signin-container {
+  background-color: #384454;
+  color: #ffffff;
+  border-color: #4a5568;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .signin-container h2 {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--dark-orange), var(--light-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.dark-mode .signin-container input {
+  background-color: #4a5568;
+  color: #ffffff;
+  border-color: #5a6c7d;
+}
+
+body.dark-mode .signin-container input::placeholder {
+  color: #cbd5e0;
+}
+
+body.dark-mode .signin-container input:focus {
+  border-color: var(--dark-orange);
+  box-shadow: 0 0 0 4px rgba(218, 123, 39, 0.2);
+  background-color: #5a6c7d;
+}
+
+body.dark-mode .connexion-link a {
+  background: linear-gradient(135deg, var(--dark-orange), var(--light-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Variables couleurs manquantes ===== */
+:root {
+  --primary-color: #4f46e5;
+  --secondary-color: #7c3aed;
+  --dark-orange: #c2410c;
+  --light-orange: #ea580c;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  .inscription-wrapper {
+    padding: 100px 15px 30px;
   }
   
-
   .signin-container {
-    background: white;
-    padding: 40px 30px;
+    padding: 30px 25px;
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    width: 350px;
-    text-align: center;
-    z-index: 2;
-    position: relative;
   }
   
   .signin-container h2 {
-    font-weight: 700;
     font-size: 1.6rem;
     margin-bottom: 25px;
-    color: #222;
   }
   
   .signin-container input {
-    width: 100%;
     padding: 12px 16px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    background-color: white;
-    color: #222;
-  }
-  
-  .signin-container input::placeholder {
-    color: #666;
-  }
-  
-  .signin-container input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
-    outline: none;
-  }
-  
-  .connexion-link {
-    margin-top: 20px;
     font-size: 0.95rem;
-    font-weight: 500;
-    text-align: center;
-    background: linear-gradient(to right, #007bff, #6610f2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
-  
-  .connexion-link a {
-    text-decoration: underline;
-    color: inherit;
-  }
-  
-  body.dark-mode .connexion-link {
-    background: linear-gradient(to right, #DA7B27, #D7572B);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
+}
 
-  #evil-button {
-    width: 200px;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: fixed;
-    left: 50%;
-    top: 70%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    max-width: calc(100% - 40px);
-    max-height: 90vh;
+@media (max-width: 320px) {
+  .signin-container {
+    padding: 25px 20px;
   }
   
-  #evil-button:hover {
-    background-color: #0056b3;
+  .signin-container h2 {
+    font-size: 1.4rem;
   }
-  
-
-  body.dark-mode {
-    background-color: #2c2f3a !important;
-    color: #eeeeee !important;
-  }
-  
-  body.dark-mode .connexion-wrapper {
-    background: #2c2f3a !important;
-  }
-  
-  body.dark-mode .login-container {
-    background-color: #384454 !important;
-    color: white !important;
-    border-color: #333 !important;
-  }
-  
-  body.dark-mode .login-container h2 {
-    color: #ffffff !important;
-  }
-  
-  body.dark-mode .login-container input {
-    background-color: #4a5568 !important;
-    color: #ffffff !important;
-    border: 1px solid #555 !important;
-  }
-  
-  body.dark-mode .login-container input::placeholder {
-    color: #dddddd !important;
-  }
-  
-  body.dark-mode #evil-button {
-    background-color: #DA7B27 !important;
-    color: white;
-  }
-  
-  @media (max-width: 420px) {
-    #evil-button {
-      max-width: 90%;
-      left: 50% !important;
-      transform: translateX(-50%) !important;
-      max-height: 90vh;
-    }
-  }
+}

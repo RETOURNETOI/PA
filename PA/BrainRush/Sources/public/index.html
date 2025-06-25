@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../CSS/index.css">
     <link rel="stylesheet" href="../CSS/chatbot.css">
     <link rel="stylesheet" href="../CSS/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   </head>
   <body class="light-background">
 
@@ -18,14 +17,16 @@
         
         <ul class="navbar-links" id="navbar-menu">
           <li><a href="index.html" id="navHome">Accueil</a></li>
-          <li><a href="traitement_index.php?page=quizz_solo" id="navSolo">Solo</a></li>
-          <li><a href="traitement_index.php?page=vs" id="navVS">VS</a></li>
-          <li><a href="traitement_index.php?page=classement" id="navRank">Classement</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=quizz_solo" id="navSolo">Solo</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=vs" id="navVS">VS</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=classement" id="navRank">Classement</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=tournois" id="navRank">Tournois</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=forum" id="navRank">Forum</a></li>
         </ul>
         
         <div class="navbar-actions">
           <button id="langToggle" class="navbar-btn icon" title="Changer la langue">
-            🇫🇷
+           <span id="langIcon">🇫🇷</span>
           </button>
           
           <button id="themeToggle" class="navbar-btn icon" title="Changer le thème">
@@ -40,8 +41,8 @@
             <span class="text">S'inscrire</span>
           </a>
           
-          <div class="avatar-container">
-            <img src="assets/avatar.png" alt="Profil" class="avatar-icon">
+          <div href="compte.html" class="avatar-container">
+            <img src="../assets/avatar_def1.png" alt="Profil" class="avatar-icon">
           </div>
         </div>
       </div>
@@ -63,7 +64,7 @@
             <div class="card-body">
               <h5 class="card-title" id="soloTitle">🧠 Quizz Solo</h5>
               <p class="card-text" id="soloDesc">Jouez en solo sur des dizaines de thèmes !</p>
-              <a href="traitement_index.php?page=quizz_solo" class="btn btn-outline-primary" id="soloBtn">Commencer</a>
+              <a href="../traitement/routeur/routeur.php?page=quizz_solo" class="btn btn-outline-primary" id="soloBtn">Commencer</a>
             </div>
           </div>
         </div>
@@ -72,7 +73,7 @@
             <div class="card-body">
               <h5 class="card-title" id="vsTitle">⚔️ Quizz VS</h5>
               <p class="card-text" id="vsDesc">Affrontez vos amis en temps réel.</p>
-              <a href="traitement_index.php?page=vs" class="btn btn-outline-danger" id="vsBtn">Défier</a>
+              <a href="../traitement/routeur/routeur.php?page=vs" class="btn btn-outline-danger" id="vsBtn">Défier</a>
             </div>
           </div>
         </div>
@@ -81,7 +82,18 @@
             <div class="card-body">
               <h5 class="card-title" id="rankTitle">🏆 Classement</h5>
               <p class="card-text" id="rankDesc">Découvrez les meilleurs joueurs.</p>
-              <a href="traitement_index.php?page=classement" class="btn btn-outline-success" id="rankBtn">Voir</a>
+              <a href="../traitement/routeur/routeur.php?page=classement" class="btn btn-outline-success" id="rankBtn">Voir</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row g-4 mt-4">
+        <div class="col-md-4 mx-auto">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="card-title" id="tournoisTitle">🏆 Tournois</h5>
+              <p class="card-text" id="tournoisDesc">Découvrez un tout nouveau niveau.</p>
+              <a href="../traitement/routeur/routeur.php?page=tournois" class="btn btn-outline-success" id="tournoisBtn">Participer</a>
             </div>
           </div>
         </div>
@@ -97,7 +109,7 @@
       <div class="podium">
         <!-- 2ème -->
         <div class="step second">
-          <div class="avatar"><img src="assets/avatar2.png" alt="Avatar 2"></div>
+          <div class="avatar"><img src="../assets/lion.png" alt="Avatar 2"></div>
           <div class="block">2</div>
           <div class="info">
             <p class="pseudo">Pseudo2</p>
@@ -107,7 +119,7 @@
 
         <!-- 1er -->
         <div class="step first">
-          <div class="avatar"><img src="assets/avatar1.png" alt="Avatar 1"></div>
+          <div class="avatar"><img src="../assets/avatar_def1.png" alt="Avatar 1"></div>
           <div class="block">1</div>
           <div class="info">
             <p class="pseudo">Pseudo1</p>
@@ -117,7 +129,7 @@
 
         <!-- 3ème -->
         <div class="step third">
-          <div class="avatar"><img src="assets/avatar3.png" alt="Avatar 3"></div>
+          <div class="avatar"><img src="../assets/tigre.png" alt="Avatar 3"></div>
           <div class="block">3</div>
           <div class="info">
             <p class="pseudo">Pseudo3</p>
@@ -131,8 +143,6 @@
     <footer class="bg-dark text-white text-center py-3">
       <p class="mb-0" id="footerText">© 2025 BrainRush. Tous droits réservés.</p>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   
     <!-- 🧠 Chatbot box -->
     <div id="chatbot-box" class="hidden">

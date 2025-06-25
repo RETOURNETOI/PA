@@ -1,143 +1,123 @@
-// ✅ Connexion.js avec dark mode, langue, sécurité du bouton, toute la phrase d'inscription cliquable et avatar ajouté dans le header
+// Script pour le toggle du menu mobile (identique à index.html)
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle menu mobile
+    const navbarToggle = document.getElementById('navbar-toggle');
+    const navbarMenu = document.getElementById('navbar-menu');
+    
+    if (navbarToggle && navbarMenu) {
+        navbarToggle.addEventListener('click', function() {
+            navbarMenu.classList.toggle('show');
+        });
+    }
 
-const evilButton = document.getElementById('evil-button');
-const OFFSET = 100;
-const SPEED = 300;
-let isFormValid = false;
-let lang = 'fr';
+    // Gestion du bouton evil de connexion - CORRECTION
+    const evilButton = document.getElementById('evil-button');
+    const loginForm = document.getElementById('loginForm');
+    
+    if (evilButton && loginForm) {
+        evilButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Vérifier que les champs sont remplis avant de soumettre
+            const emailInput = document.getElementById('emailInput');
+            const passwordInput = document.getElementById('passwordInput');
+            
+            if (!emailInput.value.trim() || !passwordInput.value.trim()) {
+                alert('Veuillez remplir tous les champs');
+                return;
+            }
+            
+            // Soumettre le formulaire
+            loginForm.submit();
+        });
+    }
 
-const translations = {
-  fr: {
-    title: "🔐 Connexion",
-    email: "Adresse email",
-    password: "Mot de passe",
-    button: "Connexion",
-    signupLine: "<a href=\"traitement_index.php?page=inscription\">Vous n'avez pas de compte ? Inscrivez-vous</a>"
-  },
-  en: {
-    title: "🔐 Login",
-    email: "Email address",
-    password: "Password",
-    button: "Login",
-    signupLine: "<a href=\"traitement_index.php?page=inscription\">Don't have an account? Sign up</a>"
-  }
-};
+    // Toggle thème
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            // Sauvegarder la préférence (éviter localStorage dans les artifacts)
+            if (document.body.classList.contains('dark-mode')) {
+                this.textContent = '☀️';
+            } else {
+                this.textContent = '🌙';
+            }
+        });
+    }
 
-const title = document.getElementById("title");
-const emailInput = document.getElementById("emailInput");
-const passwordInput = document.getElementById("passwordInput");
-const signupLine = document.getElementById("signupLine");
+    // Charger le thème par défaut
+    // Vous pouvez supprimer cette partie si localStorage pose problème
+    try {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            if (themeToggle) themeToggle.textContent = '☀️';
+        }
+    } catch(e) {
+        // Ignorer les erreurs localStorage
+        console.log('localStorage non disponible');
+    }
 
-const langToggle = document.getElementById('langToggle');
-if (langToggle) {
-  langToggle.addEventListener('click', () => {
-    lang = lang === 'fr' ? 'en' : 'fr';
+    // Toggle langue
+    const langToggle = document.getElementById('langToggle');
+    const langIcon = document.getElementById('langIcon');
+    
+    if (langToggle && langIcon) {
+        langToggle.addEventListener('click', function() {
+            // Exemple de toggle FR/EN
+            if (langIcon.textContent === '🇫🇷') {
+                langIcon.textContent = '🇬🇧';
+                changeLanguage('en');
+            } else {
+                langIcon.textContent = '🇫🇷';
+                changeLanguage('fr');
+            }
+        });
+    }
+});
+
+// Fonction pour changer la langue (exemple)
+function changeLanguage(lang) {
+    const translations = {
+        fr: {
+            title: '🔐 Connexion',
+            emailLabel: 'Adresse email',
+            passwordLabel: 'Mot de passe',
+            emailPlaceholder: 'Entrez votre email',
+            passwordPlaceholder: 'Entrez votre mot de passe',
+            signupLink: 'Vous n\'avez pas de compte ? Inscrivez-vous',
+            buttonText: 'Connexion'
+        },
+        en: {
+            title: '🔐 Login',
+            emailLabel: 'Email address',
+            passwordLabel: 'Password',
+            emailPlaceholder: 'Enter your email',
+            passwordPlaceholder: 'Enter your password',
+            signupLink: 'Don\'t have an account? Sign up',
+            buttonText: 'Login'
+        }
+    };
+
     const t = translations[lang];
-    title.textContent = t.title;
-    emailInput.placeholder = t.email;
-    passwordInput.placeholder = t.password;
-    evilButton.textContent = t.button;
-    signupLine.innerHTML = t.signupLine;
-    langToggle.querySelector('img').src = lang === 'fr' ? 'assets/drapeau_fr.png' : 'assets/drapeau_en.png';
-  });
-}
+    if (t) {
+        const titleElement = document.getElementById('title');
+        const emailLabel = document.querySelector('label[for="emailInput"]');
+        const passwordLabel = document.querySelector('label[for="passwordInput"]');
+        const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const signupLink = document.querySelector('#signupLine a');
+        const evilButton = document.getElementById('evil-button');
 
-const themeToggle = document.getElementById("themeToggle");
-const body = document.body;
-const nav = document.querySelector("nav.navbar");
-const container = document.querySelector(".login-container");
-
-function applyTheme(theme) {
-  if (theme === "dark") {
-    body.classList.add("dark-mode");
-    body.classList.remove("light-background");
-    if (nav) nav.style.background = "linear-gradient(to right, #DA7B27, #D7572B)";
-    if (container) {
-      container.style.backgroundColor = "#384454";
-      container.style.color = "#fff";
+        // Vérifier que les éléments existent avant de les modifier
+        if (titleElement) titleElement.textContent = t.title;
+        if (emailLabel) emailLabel.textContent = t.emailLabel;
+        if (passwordLabel) passwordLabel.textContent = t.passwordLabel;
+        if (emailInput) emailInput.placeholder = t.emailPlaceholder;
+        if (passwordInput) passwordInput.placeholder = t.passwordPlaceholder;
+        if (signupLink) signupLink.textContent = t.signupLink;
+        if (evilButton) evilButton.textContent = t.buttonText;
     }
-    evilButton.style.backgroundColor = "#DA7B27";
-  } else {
-    body.classList.remove("dark-mode");
-    body.classList.add("light-background");
-    if (nav) nav.style.background = "linear-gradient(to right, #007bff, #6610f2)";
-    if (container) {
-      container.style.backgroundColor = "white";
-      container.style.color = "#222";
-    }
-    evilButton.style.backgroundColor = "#007bff";
-  }
 }
-
-let currentTheme = localStorage.getItem("theme") || "light";
-applyTheme(currentTheme);
-
-if (themeToggle) {
-  themeToggle.addEventListener("click", () => {
-    currentTheme = currentTheme === "dark" ? "light" : "dark";
-    localStorage.setItem("theme", currentTheme);
-    applyTheme(currentTheme);
-  });
-}
-
-function distanceFromCenter(boxPosition, mousePosition, boxSize) {
-  return boxPosition - mousePosition + boxSize / 2;
-}
-
-function setButtonPosition(left, top) {
-  const maxLeft = window.innerWidth - evilButton.offsetWidth;
-  const maxTop = window.innerHeight - evilButton.offsetHeight;
-
-  left = Math.max(0, Math.min(left, maxLeft));
-  top = Math.max(0, Math.min(top, maxTop));
-
-  evilButton.style.left = `${left}px`;
-  evilButton.style.top = `${top}px`;
-  evilButton.style.transform = 'none';
-}
-
-document.addEventListener('mousemove', (e) => {
-  if (isFormValid) return;
-
-  const x = e.pageX;
-  const y = e.pageY;
-  const box = evilButton.getBoundingClientRect();
-
-  const dx = distanceFromCenter(box.x, x, box.width);
-  const dy = distanceFromCenter(box.y, y, box.height);
-  const hx = box.width / 2 + OFFSET;
-  const hy = box.height / 2 + OFFSET;
-
-  if (Math.abs(dx) <= hx && Math.abs(dy) <= hy) {
-    let newLeft = box.x + hx / dx * SPEED;
-    let newTop = box.y + hy / dy * SPEED;
-    setButtonPosition(newLeft, newTop);
-  }
-});
-
-function centerButton() {
-  const formBox = document.querySelector('.login-container').getBoundingClientRect();
-  const box = evilButton.getBoundingClientRect();
-
-  let centerX = formBox.left + formBox.width / 2 - box.width / 2;
-  let targetY = formBox.bottom + 24;
-
-  setButtonPosition(centerX, targetY);
-}
-
-document.getElementById('loginForm').addEventListener('input', () => {
-  if (emailInput.value.trim() && passwordInput.value.trim()) {
-    isFormValid = true;
-    centerButton();
-  } else {
-    isFormValid = false;
-  }
-});
-
-evilButton.addEventListener('click', () => {
-  if (!isFormValid) {
-    alert("Remplis le formulaire d'abord 😜");
-  } else {
-    alert("Connexion réussie ✅");
-  }
-});

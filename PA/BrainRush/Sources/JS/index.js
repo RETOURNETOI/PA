@@ -63,10 +63,17 @@ function toggleLanguage() {
 }
 
 function updateLanguageButton(lang) {
-  const langToggle = document.getElementById('langToggle');
-  if (langToggle) {
-    langToggle.textContent = lang === 'fr' ? '🇬🇧' : '🇫🇷';
-    langToggle.title = lang === 'fr' ? 'English' : 'Français';
+  const langIcon = document.getElementById('langIcon');
+  if (langIcon) {
+    if (lang === 'fr') {
+      // En mode français, on montre le drapeau anglais pour basculer vers l'anglais
+      langIcon.textContent = '🇬🇧';
+      langIcon.setAttribute('title', 'Switch to English');
+    } else {
+      // En mode anglais, on montre le drapeau français pour basculer vers le français
+      langIcon.textContent = '🇫🇷';
+      langIcon.setAttribute('title', 'Passer au français');
+    }
   }
 }
 
@@ -126,6 +133,74 @@ function setupButtonEffects() {
   });
 }
 
+// Fonction pour traduire la page (optionnelle)
+function translatePage(lang) {
+  const translations = {
+    fr: {
+      welcomeTitle: "Bienvenue sur BrainRush !",
+      welcomeSubtitle: "Testez vos connaissances, affrontez vos amis, grimpez dans le classement !",
+      navHome: "Accueil",
+      navSolo: "Solo",
+      navVS: "VS",
+      navRank: "Classement",
+      soloTitle: "🧠 Quizz Solo",
+      soloDesc: "Jouez en solo sur des dizaines de thèmes !",
+      soloBtn: "Commencer",
+      vsTitle: "⚔️ Quizz VS",
+      vsDesc: "Affrontez vos amis en temps réel.",
+      vsBtn: "Défier",
+      rankTitle: "🏆 Classement",
+      rankDesc: "Découvrez les meilleurs joueurs.",
+      rankBtn: "Voir",
+      tournoisTitle: "🏆 Tournois",
+      tournoisDesc: "Découvrez un tout nouveau niveau.",
+      tournoisBtn: "Participer",
+      podiumTitle: "🏆 Podium des 3 MVP All-Time",
+      footerText: "© 2025 BrainRush. Tous droits réservés.",
+      loginBtn: "Se connecter",
+      signupBtn: "S'inscrire"
+    },
+    en: {
+      welcomeTitle: "Welcome to BrainRush!",
+      welcomeSubtitle: "Test your knowledge, challenge your friends, climb the rankings!",
+      navHome: "Home",
+      navSolo: "Solo",
+      navVS: "VS",
+      navRank: "Rankings",
+      soloTitle: "🧠 Solo Quiz",
+      soloDesc: "Play solo on dozens of themes!",
+      soloBtn: "Start",
+      vsTitle: "⚔️ VS Quiz",
+      vsDesc: "Challenge your friends in real time.",
+      vsBtn: "Challenge",
+      rankTitle: "🏆 Rankings",
+      rankDesc: "Discover the best players.",
+      rankBtn: "View",
+      tournoisTitle: "🏆 Tournaments",
+      tournoisDesc: "Discover a whole new level.",
+      tournoisBtn: "Participate",
+      podiumTitle: "🏆 Top 3 MVP All-Time Podium",
+      footerText: "© 2025 BrainRush. All rights reserved.",
+      loginBtn: "Login",
+      signupBtn: "Sign up"
+    }
+  };
+
+  const texts = translations[lang];
+  if (texts) {
+    Object.keys(texts).forEach(key => {
+      const element = document.getElementById(key);
+      if (element) {
+        if (element.tagName === 'INPUT') {
+          element.placeholder = texts[key];
+        } else {
+          element.textContent = texts[key];
+        }
+      }
+    });
+  }
+}
+
 // Initialisation au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM Content Loaded - index.js');
@@ -139,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedLang = localStorage.getItem('lang') || 'fr';
   console.log('Saved language:', savedLang);
   updateLanguageButton(savedLang);
+  translatePage(savedLang);
 
   // Écouteurs d'événements
   const themeToggle = document.getElementById('themeToggle');
@@ -162,4 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupChatbotToggle();
   handleResponsiveNavbar();
   setupButtonEffects();
+  
+  // Exposer les fonctions globalement
+  window.translatePage = translatePage;
 });

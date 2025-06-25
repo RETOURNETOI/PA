@@ -1,108 +1,91 @@
+/* === main.css - Styles de la navbar personnaliséePour faire fonctionner la navbar identique === */
+
+/* ===== Variables globales pour les couleurs ===== */
 :root {
   --primary-color: #4f46e5;
   --secondary-color: #7c3aed;
+  --navbar-primary: #4f46e5;
+  --navbar-secondary: #7c3aed;
   --dark-orange: #c2410c;
   --light-orange: #ea580c;
-  --text-light: #f8f9fa;
-  --text-dark: #212529;
-  --bg-light: #f8f9fa;
-  --bg-dark: #121212;
-  --card-bg-light: #ffffff;
-  --card-bg-dark: #1e1e1e;
-  --border-radius: 12px;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Base Styles */
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  transition: all 0.3s ease;
-}
-
-/* Theme Modes */
-body.light-mode {
-  background-color: var(--bg-light);
-  color: var(--text-dark);
 }
 
 body.dark-mode {
-  background-color: var(--bg-dark);
-  color: var(--text-light);
+  --navbar-primary: #c2410c;
+  --navbar-secondary: #ea580c;
+  --primary-color: #c2410c;
+  --secondary-color: #ea580c;
 }
 
-/* Header */
-.header-main {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  padding: 3rem 0;
-  text-align: center;
-}
-
-body.dark-mode .header-main {
-  background: linear-gradient(135deg, var(--dark-orange), var(--light-orange));
-}
-
-/* Navbar */
+/* ===== Navbar personnalisée ===== */
 .custom-navbar {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  padding: 0.8rem 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  background: linear-gradient(135deg, var(--navbar-primary), var(--navbar-secondary));
+  padding: 1rem 0;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
-}
-
-body.dark-mode .custom-navbar {
-  background: linear-gradient(135deg, var(--dark-orange), var(--light-orange));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 0 2rem;
 }
 
+/* ===== Brand ===== */
 .navbar-brand {
-  margin: 0;
-  font-size: 1.8rem;
   font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
-  color: white;
-  text-decoration: none;
-}
-
-.navbar-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
   font-size: 1.5rem;
-  cursor: pointer;
+  font-weight: 700;
+  color: white !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
+.navbar-brand:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* ===== Navigation links ===== */
 .navbar-links {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .navbar-links li a {
-  color: white;
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   font-weight: 500;
-  transition: all 0.2s;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .navbar-links li a:hover {
-  opacity: 0.8;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
+.navbar-links li a.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* ===== Actions de la navbar ===== */
 .navbar-actions {
   display: flex;
   align-items: center;
@@ -110,99 +93,163 @@ body.dark-mode .custom-navbar {
 }
 
 .navbar-btn {
-  padding: 0.6rem 1.2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
-  cursor: pointer;
   border: none;
-}
-
-.navbar-btn.icon {
-  padding: 0.6rem;
-  width: 40px;
-  height: 40px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.navbar-btn.secondary {
-  background: rgba(255, 255, 255, 0.15);
+.navbar-btn.icon {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
   color: white;
 }
 
+.navbar-btn.icon:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.navbar-btn.secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar-btn.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
 .navbar-btn.primary {
-  background: white;
-  color: var(--primary-color);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-body.dark-mode .navbar-btn.primary {
-  color: var(--dark-orange);
+.navbar-btn.primary:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
+/* ===== Avatar container ===== */
 .avatar-container {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid white;
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  transition: transform 0.2s;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
 }
 
 .avatar-container:hover {
+  background-color: rgba(255, 255, 255, 0.1);
   transform: scale(1.05);
 }
 
 .avatar-icon {
-  width: 100%;
-  height: 100%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Footer */
-.footer-main {
-  background-color: #212529;
-  color: white;
-  text-align: center;
-  padding: 1.5rem 0;
-  margin-top: 3rem;
+/* ===== Icônes spécifiques ===== */
+#langIcon {
+  font-size: 20px;
+  display: block;
+  line-height: 1;
+  pointer-events: none;
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
-  .navbar-toggle {
-    display: block;
+  .navbar-container {
+    padding: 0 1rem;
   }
   
   .navbar-links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0;
-    display: none;
+    display: none; /* Vous pouvez implémenter un menu hamburger ici */
   }
   
-  body.dark-mode .navbar-links {
-    background: linear-gradient(135deg, var(--dark-orange), var(--light-orange));
-  }
-  
-  .navbar-links.show {
-    display: flex;
+  .navbar-actions {
+    gap: 0.5rem;
   }
   
   .navbar-btn .text {
     display: none;
   }
   
-  .navbar-btn.primary .text,
-  .navbar-btn.secondary .text {
-    display: inline;
+  .navbar-btn {
+    padding: 0.5rem;
+    min-width: 40px;
   }
+}
+
+@media (max-width: 480px) {
+  .navbar-container {
+    padding: 0 0.5rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+}
+
+/* ===== Body padding pour compenser la navbar fixe ===== */
+body {
+  padding-top: 80px; /* Ajustez selon la hauteur de votre navbar */
+}
+
+/* ===== Styles pour les boutons généraux ===== */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 2px solid;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-outline-primary {
+  background-color: transparent;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Utilitaires ===== */
+.w-100 {
+  width: 100%;
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.hidden {
+  display: none;
 }

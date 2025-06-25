@@ -1,158 +1,303 @@
 /* =============================
+   VARIABLES CSS SPÉCIFIQUES CONNEXION
+   ============================= */
+:root {
+  --connexion-primary: #4f46e5;
+  --connexion-secondary: #7c3aed;
+  --connexion-dark-orange: #c2410c;
+  --connexion-light-orange: #ea580c;
+}
+
+body.dark-mode {
+  --connexion-primary: #c2410c;
+  --connexion-secondary: #ea580c;
+}
+
+/* =============================
    WRAPPER DE LA PAGE
    ============================= */
-   .connexion-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    background: var(--wrapper-bg, linear-gradient(to bottom right, #f4f7ff, #e8efff));
-    position: relative;
-    overflow: hidden;
-  }
-  
-  /* =============================
-     CONTAINER DU FORMULAIRE
-     ============================= */
-  .login-container {
-    background: white;
-    padding: 40px 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    width: 350px;
-    text-align: center;
-    z-index: 2;
-    position: relative;
-  }
-  
-  .login-container h2 {
-    font-weight: 700;
-    font-size: 1.6rem;
-    margin-bottom: 25px;
-    color: #222;
-  }
-  
-  .login-container input {
-    width: 100%;
-    padding: 12px 16px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    background-color: white;
-    color: #222;
-  }
-  
-  .login-container input::placeholder {
-    color: #666;
-  }
-  
-  .login-container input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
-    outline: none;
-  }
-  
-  /* =============================
-     TEXTE LIEN INSCRIPTION
-     ============================= */
-  .inscription-link {
-    margin-top: 20px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-align: center;
-    background: linear-gradient(to right, #007bff, #6610f2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .inscription-link a {
-    text-decoration: underline;
-    color: inherit;
-  }
-  
-  body.dark-mode .inscription-link {
-    background: linear-gradient(to right, #DA7B27, #D7572B);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  /* =============================
-     BOUTON « EVIL » DE CONNEXION
-     ============================= */
+.connexion-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #f4f7ff, #e8efff);
+  position: relative;
+  overflow: hidden;
+}
+
+body.dark-mode .connexion-wrapper {
+  background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+/* =============================
+   CONTAINER DU FORMULAIRE
+   ============================= */
+.login-container {
+  background: white;
+  padding: 3rem 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .login-container {
+  background: #1e293b;
+  color: white;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid #334155;
+}
+
+.login-container h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--connexion-primary);
+  text-align: center;
+}
+
+body.dark-mode .login-container h2 {
+  color: var(--connexion-light-orange);
+}
+
+/* =============================
+   FORMULAIRE
+   ============================= */
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+body.dark-mode .form-group label {
+  color: #e2e8f0;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+  color: #333;
+  font-family: inherit;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--connexion-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+body.dark-mode .form-control {
+  background: #334155;
+  border-color: #475569;
+  color: white;
+}
+
+body.dark-mode .form-control:focus {
+  border-color: var(--connexion-light-orange);
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+.form-control::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode .form-control::placeholder {
+  color: #64748b;
+}
+
+/* =============================
+   BOUTON « EVIL » DE CONNEXION - RESTAURÉ AVEC DÉPLACEMENT
+   ============================= */
+#evil-button {
+  width: 100%;
+  max-width: 300px;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--connexion-primary), var(--connexion-secondary));
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: fixed;
+  left: 50%;
+  top: 70%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+  font-family: inherit;
+}
+
+#evil-button:hover {
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+  transform: translate(-50%, -50%) translateY(-2px);
+}
+
+#evil-button:active {
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+body.dark-mode #evil-button {
+  background: linear-gradient(135deg, var(--connexion-dark-orange), var(--connexion-light-orange));
+  box-shadow: 0 4px 15px rgba(194, 65, 12, 0.3);
+}
+
+body.dark-mode #evil-button:hover {
+  box-shadow: 0 6px 20px rgba(194, 65, 12, 0.4);
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
   #evil-button {
-    width: 200px;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    max-width: 90%;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     position: fixed;
-    left: 50%;
-    top: 70%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    max-width: calc(100% - 40px);
-    max-height: 90vh;
+    top: auto;
+    bottom: 2rem;
   }
   
   #evil-button:hover {
-    background-color: #0056b3;
+    transform: translateX(-50%) translateY(-2px) !important;
   }
   
-  /* =============================
-     DARK MODE
-     ============================= */
-  body.dark-mode {
-    background-color: #2c2f3a !important;
-    color: #eeeeee !important;
+  #evil-button:active {
+    transform: translateX(-50%) translateY(0) !important;
   }
-  
-  body.dark-mode .connexion-wrapper {
-    background: #2c2f3a !important;
+}
+
+@media (max-width: 480px) {
+  #evil-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
   }
-  
-  body.dark-mode .login-container {
-    background-color: #384454 !important;
-    color: white !important;
-    border-color: #333 !important;
+}
+
+/* =============================
+   TEXTE LIEN INSCRIPTION
+   ============================= */
+.inscription-link {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.inscription-link a {
+  color: var(--connexion-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.inscription-link a:hover {
+  color: var(--connexion-secondary);
+  text-decoration: underline;
+}
+
+body.dark-mode .inscription-link a {
+  color: var(--connexion-light-orange);
+}
+
+body.dark-mode .inscription-link a:hover {
+  color: var(--connexion-dark-orange);
+}
+
+/* =============================
+   RESPONSIVE
+   ============================= */
+@media (max-width: 768px) {
+  .connexion-wrapper {
+    padding: 1rem;
+    min-height: calc(100vh - 60px);
   }
-  
-  body.dark-mode .login-container h2 {
-    color: #ffffff !important;
+
+  .login-container {
+    padding: 2rem 1.5rem;
+    margin: 1rem 0;
+    max-width: 350px;
   }
-  
-  body.dark-mode .login-container input {
-    background-color: #4a5568 !important;
-    color: #ffffff !important;
-    border: 1px solid #555 !important;
+
+  .login-container h2 {
+    font-size: 1.8rem;
   }
-  
-  body.dark-mode .login-container input::placeholder {
-    color: #dddddd !important;
+
+  #evil-button {
+    max-width: 90%;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    position: fixed;
+    top: auto;
+    bottom: 2rem;
   }
-  
-  body.dark-mode #evil-button {
-    background-color: #DA7B27 !important;
-    color: white;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1.5rem 1rem;
+    max-width: 320px;
   }
-  
-  /* Empêcher le bouton de sortir de la fenêtre */
-  @media (max-width: 420px) {
-    #evil-button {
-      max-width: 90%;
-      left: 50% !important;
-      transform: translateX(-50%) !important;
-      max-height: 90vh;
-    }
+
+  .form-control {
+    padding: 0.75rem;
+    font-size: 0.95rem;
   }
+
+  #evil-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* =============================
+   UTILITAIRES
+   ============================= */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.gap-3 {
+  gap: 1rem;
+}
+
+.me-auto {
+  margin-right: auto;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-lg-0 {
+  margin-bottom: 0;
+}
