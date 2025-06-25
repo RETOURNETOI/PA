@@ -1,6 +1,6 @@
 <?php
 require_once 'db.php';
-require_once 'User.php';
+require_once 'user_funct.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,21 +15,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($data && password_verify($password, $data['password'])) {
                 $user = new User($data['username'], $data['email'], $data['password']);
-                $user->setUsername($data['username']);
-                $user->setEmail($data['email']);
-                $user->setPassword($data['password']);
+                
                 $_SESSION['user_id'] = $data['id'];
                 $_SESSION['username'] = $data['username'];
-                echo "Connexion réussie. Bienvenue, " . htmlspecialchars($data['username']) . " !";
-                // header('Location: tableau_de_bord.php'); // à utiliser pour rediriger
+                $_SESSION['email'] = $data['email'];
+                
+                header('Location: ../../public/index.php');
+                exit();
             } else {
-                echo "Email ou mot de passe incorrect.";
+                header('Location: ../../public/connexion.html?error=invalid_credentials');
+                exit();
             }
         } catch (PDOException $e) {
             error_log("Erreur connexion : " . $e->getMessage());
-            echo "Erreur lors de la connexion.";
+            header('Location: ../../public/connexion.html?error=database_error');
+            exit();
         }
     } else {
-        echo "Tous les champs sont requis.";
+        header('Location: ../../public/connexion.html?error=missing_fields');
+        exit();
     }
 }
+
+header('Location: ../../public/connexion.html');
+exit();
+?>

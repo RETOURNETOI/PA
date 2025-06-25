@@ -2,7 +2,6 @@
 header('Content-Type: text/plain; charset=utf-8');
 session_start();
 
-// Connexion à la base de données
 try {
     $pdo = new PDO('mysql:host=localhost;dbname=brainrush;charset=utf8', 'root', '');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -11,7 +10,6 @@ try {
     exit;
 }
 
-// Vérifie que l'utilisateur est connecté
 if (!isset($_SESSION['utilisateur_id'])) {
     echo "🔒 Vous devez être connecté pour utiliser le chatbot.";
     exit;
@@ -20,13 +18,11 @@ if (!isset($_SESSION['utilisateur_id'])) {
 $userId = $_SESSION['utilisateur_id'];
 $message = strtolower(trim($_POST['message'] ?? ''));
 
-// Sécurité : pas de message vide
 if (empty($message)) {
     echo "❗ Veuillez entrer un message.";
     exit;
 }
 
-// Commande : ajouter un ami
 if (preg_match('/ajouter\s+([a-z0-9_]+)\s+comme\s+ami/', $message, $matches)) {
     $pseudo = htmlspecialchars($matches[1]);
 
@@ -52,7 +48,6 @@ if (preg_match('/ajouter\s+([a-z0-9_]+)\s+comme\s+ami/', $message, $matches)) {
     exit;
 }
 
-// Commande : envoyer un message
 if (preg_match('/envoyer un message à\s+([a-z0-9_]+)\s+(.+)/', $message, $matches)) {
     $pseudo = htmlspecialchars($matches[1]);
     $contenu = htmlspecialchars($matches[2]);
@@ -71,7 +66,6 @@ if (preg_match('/envoyer un message à\s+([a-z0-9_]+)\s+(.+)/', $message, $match
     exit;
 }
 
-// Réponses simples
 if (str_contains($message, 'bonjour')) {
     echo "👋 Hello ! Besoin d'aide ? Tape \"aide\".";
 } elseif (str_contains($message, 'aide')) {

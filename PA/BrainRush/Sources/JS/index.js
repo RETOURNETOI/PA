@@ -1,11 +1,9 @@
-// index.js
 function applyTheme(theme) {
   const body = document.body;
   const nav = document.querySelector(".custom-navbar");
   const header = document.querySelector("header");
   const themeToggle = document.getElementById('themeToggle');
 
-  // Nettoyer toutes les classes de thème
   body.classList.remove("dark-mode", "light-background", "light-mode");
 
   if (theme === "dark") {
@@ -22,7 +20,6 @@ function applyTheme(theme) {
     if (themeToggle) themeToggle.textContent = "🌙";
   }
 
-  // Appliquer le thème au chatbot si la fonction existe
   if (typeof window.applyChatbotTheme === 'function') {
     window.applyChatbotTheme(theme);
   }
@@ -39,7 +36,6 @@ function toggleTheme() {
   localStorage.setItem('theme', newTheme);
   applyTheme(newTheme);
   
-  // Mettre à jour le chatbot
   if (typeof window.displayChatbotWelcome === 'function') {
     const lang = localStorage.getItem('lang') || 'fr';
     const isConnected = localStorage.getItem('user_connected') === 'true';
@@ -56,7 +52,6 @@ function toggleLanguage() {
   localStorage.setItem('lang', newLang);
   updateLanguageButton(newLang);
   
-  // Traduire la page
   if (typeof window.translatePage === 'function') {
     window.translatePage(newLang);
   }
@@ -66,11 +61,9 @@ function updateLanguageButton(lang) {
   const langIcon = document.getElementById('langIcon');
   if (langIcon) {
     if (lang === 'fr') {
-      // En mode français, on montre le drapeau anglais pour basculer vers l'anglais
       langIcon.textContent = '🇬🇧';
       langIcon.setAttribute('title', 'Switch to English');
     } else {
-      // En mode anglais, on montre le drapeau français pour basculer vers le français
       langIcon.textContent = '🇫🇷';
       langIcon.setAttribute('title', 'Passer au français');
     }
@@ -133,7 +126,6 @@ function setupButtonEffects() {
   });
 }
 
-// Fonction pour traduire la page (optionnelle)
 function translatePage(lang) {
   const translations = {
     fr: {
@@ -201,44 +193,36 @@ function translatePage(lang) {
   }
 }
 
-// Initialisation au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM Content Loaded - index.js');
-  
-  // Initialisation du thème
+
   const savedTheme = localStorage.getItem('theme') || 'light';
   console.log('Saved theme:', savedTheme);
   applyTheme(savedTheme);
 
-  // Initialisation de la langue
   const savedLang = localStorage.getItem('lang') || 'fr';
   console.log('Saved language:', savedLang);
   updateLanguageButton(savedLang);
   translatePage(savedLang);
 
-  // Écouteurs d'événements
   const themeToggle = document.getElementById('themeToggle');
   const langToggle = document.getElementById('langToggle');
   
   if (themeToggle) {
-    // Supprimer les anciens listeners s'ils existent
     themeToggle.removeEventListener('click', toggleTheme);
     themeToggle.addEventListener('click', toggleTheme);
     console.log('Theme toggle listener added');
   }
   
   if (langToggle) {
-    // Supprimer les anciens listeners s'ils existent
     langToggle.removeEventListener('click', toggleLanguage);
     langToggle.addEventListener('click', toggleLanguage);
     console.log('Language toggle listener added');
   }
 
-  // Initialisation des autres fonctionnalités
   setupChatbotToggle();
   handleResponsiveNavbar();
   setupButtonEffects();
   
-  // Exposer les fonctions globalement
   window.translatePage = translatePage;
 });

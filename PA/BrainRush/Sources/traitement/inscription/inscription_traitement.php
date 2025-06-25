@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($username) && !empty($email) && !empty($password)) {
         try {
-            // Vérifie si l'utilisateur existe déjà
             $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
             $stmt->execute([$email]);
             if ($stmt->fetch()) {

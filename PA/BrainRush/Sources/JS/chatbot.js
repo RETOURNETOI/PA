@@ -1,4 +1,3 @@
-// chatbot.js
 const translations = {
   fr: {
     welcomeTitle: "Bienvenue sur BrainRush !",
@@ -50,10 +49,8 @@ const translations = {
   }
 };
 
-// Rendre les traductions disponibles globalement
 window.translations = translations;
 
-// Fonction pour appliquer le thème au chatbot
 window.applyChatbotTheme = function(theme) {
   const chatbotBox = document.getElementById('chatbot-box');
   const chatbotIcon = document.getElementById('chatbot-icon');
@@ -86,25 +83,21 @@ window.applyChatbotTheme = function(theme) {
   });
 };
 
-// Fonction pour afficher le message de bienvenue du chatbot
 window.displayChatbotWelcome = function(lang = 'fr', theme = 'light', isConnected = false) {
   const chatbox = document.getElementById('chatbox');
   const userInput = document.getElementById('userInput');
   
   if (!chatbox) return;
-  
-  // Vider le chatbox
+
   chatbox.innerHTML = '';
-  
-  // Message de bienvenue
+
   const welcomeMsg = document.createElement('div');
   welcomeMsg.className = 'message bot';
   welcomeMsg.textContent = isConnected 
     ? translations[lang].welcomeConnected 
     : translations[lang].welcomeDisconnected;
   chatbox.appendChild(welcomeMsg);
-  
-  // Boutons de connexion si non connecté
+
   if (!isConnected) {
     const btnContainer = document.createElement('div');
     btnContainer.className = 'chatbot-button-container';
@@ -121,22 +114,17 @@ window.displayChatbotWelcome = function(lang = 'fr', theme = 'light', isConnecte
     btnContainer.appendChild(signupBtn);
     chatbox.appendChild(btnContainer);
   }
-  
-  // Mettre à jour le placeholder de l'input
+
   if (userInput) {
     userInput.placeholder = translations[lang].inputPlaceholder;
   }
-  
-  // Appliquer le thème
+
   window.applyChatbotTheme(theme);
-  
-  // Scroll vers le bas
+
   chatbox.scrollTop = chatbox.scrollHeight;
 };
 
-// Fonction de traduction globale
 window.translatePage = function(lang) {
-  // Traduire tous les éléments avec un ID
   const elements = document.querySelectorAll('[id]');
   elements.forEach(el => {
     const key = el.id;
@@ -150,22 +138,19 @@ window.translatePage = function(lang) {
       }
     }
   });
-  
-  // Mettre à jour le chatbot
+
   const savedTheme = localStorage.getItem('theme') || 'light';
   const isConnected = localStorage.getItem('user_connected') === 'true';
   window.displayChatbotWelcome(lang, savedTheme, isConnected);
 };
 
-// Initialisation du chatbot
 function initChatbot() {
   const theme = localStorage.getItem('theme') || 'light';
   const lang = localStorage.getItem('lang') || 'fr';
   const isConnected = localStorage.getItem('user_connected') === 'true';
   
   window.displayChatbotWelcome(lang, theme, isConnected);
-  
-  // Gestion de l'input utilisateur
+
   const userInput = document.getElementById('userInput');
   if (userInput) {
     userInput.addEventListener('keypress', (e) => {
@@ -174,14 +159,12 @@ function initChatbot() {
         
         const chatbox = document.getElementById('chatbox');
         const currentLang = localStorage.getItem('lang') || 'fr';
-        
-        // Ajouter le message de l'utilisateur
+
         const userMessage = document.createElement('div');
         userMessage.className = 'message user';
         userMessage.textContent = userInput.value;
         chatbox.appendChild(userMessage);
-        
-        // Réponse du bot
+
         const botMessage = document.createElement('div');
         botMessage.className = 'message bot';
         botMessage.textContent = translations[currentLang].welcomeConnected;
@@ -194,7 +177,6 @@ function initChatbot() {
   }
 }
 
-// Initialisation au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
   const lang = localStorage.getItem('lang') || 'fr';
   window.translatePage(lang);

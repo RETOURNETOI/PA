@@ -23,7 +23,6 @@
   <p>Pas de panique ! Vous pouvez revenir à l'accueil.</p>
 </section>
 
-<!-- 🧠 Chatbot intégré sur la page 404 -->
 <div id="chatbot-box">
   <div id="chatbox" class="chatbox-content"></div>
   <button id="close-chatbot" class="close-chatbot">×</button>

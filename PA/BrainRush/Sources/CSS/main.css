@@ -1,6 +1,3 @@
-/* === main.css - Styles de la navbar personnaliséePour faire fonctionner la navbar identique === */
-
-/* ===== Variables globales pour les couleurs ===== */
 :root {
   --primary-color: #4f46e5;
   --secondary-color: #7c3aed;
@@ -17,7 +14,6 @@ body.dark-mode {
   --secondary-color: #ea580c;
 }
 
-/* ===== Navbar personnalisée ===== */
 .custom-navbar {
   background: linear-gradient(135deg, var(--navbar-primary), var(--navbar-secondary));
   padding: 1rem 0;
@@ -39,7 +35,6 @@ body.dark-mode {
   padding: 0 2rem;
 }
 
-/* ===== Brand ===== */
 .navbar-brand {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.5rem;
@@ -54,7 +49,6 @@ body.dark-mode {
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-/* ===== Navigation links ===== */
 .navbar-links {
   display: flex;
   list-style: none;
@@ -85,7 +79,6 @@ body.dark-mode {
   color: white;
 }
 
-/* ===== Actions de la navbar ===== */
 .navbar-actions {
   display: flex;
   align-items: center;
@@ -144,7 +137,6 @@ body.dark-mode {
   transform: translateY(-2px);
 }
 
-/* ===== Avatar container ===== */
 .avatar-container {
   display: flex;
   align-items: center;
@@ -167,7 +159,6 @@ body.dark-mode {
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-/* ===== Icônes spécifiques ===== */
 #langIcon {
   font-size: 20px;
   display: block;
@@ -175,14 +166,13 @@ body.dark-mode {
   pointer-events: none;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .navbar-container {
     padding: 0 1rem;
   }
   
   .navbar-links {
-    display: none; /* Vous pouvez implémenter un menu hamburger ici */
+    display: none;
   }
   
   .navbar-actions {
@@ -209,12 +199,10 @@ body.dark-mode {
   }
 }
 
-/* ===== Body padding pour compenser la navbar fixe ===== */
 body {
-  padding-top: 80px; /* Ajustez selon la hauteur de votre navbar */
+  padding-top: 80px;
 }
 
-/* ===== Styles pour les boutons généraux ===== */
 .btn {
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -241,7 +229,6 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== Utilitaires ===== */
 .w-100 {
   width: 100%;
 }
