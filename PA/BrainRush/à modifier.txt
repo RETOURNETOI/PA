@@ -1,0 +1,5 @@
+- tout le dossier admin
+- tout le dossier à vérifier
+- finaliser le online
+- intégrer le forum et les pages de versus (1vs1, solo)
+- mettre à jour la bdd et le fichier routeur.php
