@@ -14,3 +14,4 @@
 - install de glpi sur le serveur (gestion de ticket, mise en place de classeur excel à partir des logs) [Kevin Hu]
 - mettre un mdp oublié pour connexion (Kevin Hu)
 - finaliser le tchatbot (Kevin C) {optionnel}
+- séparer le html, le css, le js et le php dans des fichiers distinct et réorganiser l'arbo de manière plus simple pour le coté admin avec la méthode MVC (Kevin C)
