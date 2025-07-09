@@ -15,3 +15,7 @@
 - mettre un mdp oublié pour connexion (Kevin Hu)
 - finaliser le tchatbot (Kevin C) {optionnel}
 - séparer le html, le css, le js et le php dans des fichiers distinct et réorganiser l'arbo de manière plus simple pour le coté admin avec la méthode MVC (Kevin C)
+- newsletter 
+- gestion de signalement, tout peut avoir un signalement (compte, message, etc) mais egalement un signalement auto avec une bibliothèque de mots interdit 
+- gérer les bans (avec mails spé pour ça)
+- faire la page classement 
