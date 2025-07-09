@@ -1,10 +1,11 @@
 <?php
+require_once '../traitement/Bdd/connexion.php';
 session_start();
-require_once __DIR__.'/../config/db.php';
 
 class AdminController {
+  
   public static function requireAdmin() {
-    if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+    if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
       header("Location: /login.php");
       exit;
     }
@@ -12,62 +13,57 @@ class AdminController {
 
   public static function listUsers() {
     global $pdo;
-    return $pdo->query("SELECT * FROM users")->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->query("SELECT id, username, email, role FROM users");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public static function createUser($data) {
     global $pdo;
-    $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-    $stmt->execute([$data['username'], $data['email'], password_hash($data['password'], PASSWORD_DEFAULT)]);
+    $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
+    $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+    $role = in_array($data['role'], ['admin', 'user']) ? $data['role'] : 'user';
+    $stmt->execute([
+      $data['username'],
+      $data['email'],
+      $hashedPassword,
+      $role
+    ]);
+    self::logAction("Création de l'utilisateur " . $data['email']);
   }
 
   public static function updateUser($id, $data) {
     global $pdo;
-    $stmt = $pdo->prepare("UPDATE users SET username=?, email=? WHERE id=?");
-    $stmt->execute([$data['username'], $data['email'], $id]);
+    $stmt = $pdo->prepare("UPDATE users SET username = ?, email = ?, role = ? WHERE id = ?");
+    $role = in_array($data['role'], ['admin', 'user']) ? $data['role'] : 'user';
+    $stmt->execute([
+      $data['username'],
+      $data['email'],
+      $role,
+      $id
+    ]);
+    self::logAction("Modification de l'utilisateur ID " . $id);
   }
 
   public static function deleteUser($id) {
     global $pdo;
-    $pdo->prepare("DELETE FROM users WHERE id = ?")->execute([$id]);
+    if ($_SESSION['user_id'] == $id) {
+      return;
+    }
+    $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
+    $stmt->execute([$id]);
+    self::logAction("Suppression de l'utilisateur ID " . $id);
   }
 
-  public static function getPendingPhotos() {
+  public static function getAdminCount() {
     global $pdo;
-    return $pdo->query("SELECT id, username, photo FROM users WHERE is_approved = 0 AND photo IS NOT NULL")->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'admin'");
+    return $stmt->fetchColumn();
   }
 
-  public static function approvePhoto($id) {
+  public static function logAction($action) {
     global $pdo;
-    $pdo->prepare("UPDATE users SET is_approved = 1 WHERE id = ?")->execute([$id]);
-  }
-
-  public static function rejectPhoto($id) {
-    global $pdo;
-    $u = $pdo->prepare("SELECT photo FROM users WHERE id=?")->execute([$id]);
-    $file = $pdo->query("SELECT photo FROM users WHERE id=$id")->fetch(PDO::FETCH_ASSOC)['photo'];
-    if ($file && file_exists(__DIR__.'/../uploads/'.$file)) unlink(__DIR__.'/../uploads/'.$file);
-    $pdo->prepare("UPDATE users SET photo = NULL WHERE id = ?")->execute([$id]);
-  }
-
-  public static function getNotifications() {
-    global $pdo;
-    return $pdo->query("SELECT * FROM notifications_admin WHERE read_flag = 0 ORDER BY date DESC")->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-  public static function markNotificationRead($id) {
-    global $pdo;
-    $pdo->prepare("UPDATE notifications_admin SET read_flag = 1 WHERE id = ?")->execute([$id]);
-  }
-
-  public static function getUserCount() {
-    global $pdo;
-    return $pdo->query("SELECT COUNT(*) AS total FROM users")->fetch(PDO::FETCH_ASSOC)['total'];
-  }
-
-  public static function getLiveVisitors() {
-    global $pdo;
-    $stmt = $pdo->query("SELECT COUNT(*) AS total FROM active_visitors WHERE last_ping > (NOW() - INTERVAL 1 MINUTE)");
-    return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    if (!isset($_SESSION['user_id'])) return;
+    $stmt = $pdo->prepare("INSERT INTO admin_logs (admin_id, action) VALUES (?, ?)");
+    $stmt->execute([$_SESSION['user_id'], $action]);
   }
 }

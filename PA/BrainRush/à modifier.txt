@@ -1,5 +1,16 @@
-- tout le dossier admin
-- tout le dossier à vérifier
-- finaliser le online
-- intégrer le forum et les pages de versus (1vs1, solo)
-- mettre à jour la bdd et le fichier routeur.php
+- tout le dossier admin (Kevin C)
+- tout le dossier verif à vérifier et à implémenter dans le code (Kevin C)
+- finaliser le online (Kevin C)
+- intégrer le forum et les pages de versus (1vs1, solo) (Kevin C)
+- mettre à jour la bdd et le fichier routeur.php (Kevin C)
+- finaliser tout le css et le style {optionnel}
+- faire la partie compte (Lance)
+- email lors de l'inscription avec php mailer (Kevin Hu)
+- gestion des erreurs (page 404...) (Lance)
+- mise au point du captcha (Lance)
+- mettre un moteur de recheche dans le forum avec l'api fetch (Kevin C)
+- finaliser le forum (Kevin C)
+- extraction format pdf resultat questions reponse (avec visu graphique sur chaque question/reponse) {Fin}
+- install de glpi sur le serveur (gestion de ticket, mise en place de classeur excel à partir des logs) [Kevin Hu]
+- mettre un mdp oublié pour connexion (Kevin Hu)
+- finaliser le tchatbot (Kevin C) {optionnel}

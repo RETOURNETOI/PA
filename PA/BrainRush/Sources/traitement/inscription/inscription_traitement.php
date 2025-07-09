@@ -1,6 +1,6 @@
 <?php
-require_once 'db.php';
-require_once 'User.php';
+require_once '../Bdd/connexion.php';
+require_once '../../admin/views/user.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');

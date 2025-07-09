@@ -1,6 +1,6 @@
 <?php
-require_once 'db.php';
-require_once 'user_funct.php';
+require_once '../Bdd/connexion.php';
+require_once '../utilisateur/user_funct.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
