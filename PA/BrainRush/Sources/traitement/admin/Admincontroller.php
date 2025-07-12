@@ -13,7 +13,7 @@ class AdminController {
 
   public static function listUsers() {
     global $pdo;
-    $stmt = $pdo->query("SELECT id, username, email, role FROM users");
+    $stmt = $pdo->query("SELECT id, username, email, role, banned_until FROM users");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
@@ -54,10 +54,57 @@ class AdminController {
     self::logAction("Suppression de l'utilisateur ID " . $id);
   }
 
+  public static function banUser($id, $duration = null) {
+    global $pdo;
+    $until = $duration ? date('Y-m-d H:i:s', strtotime($duration)) : null;
+    $stmt = $pdo->prepare("UPDATE users SET banned_until = ? WHERE id = ?");
+    $stmt->execute([$until, $id]);
+    self::logAction("Bannissement de l'utilisateur ID " . $id . ($duration ? " pour $duration" : " définitivement"));
+  }
+
+  public static function unbanUser($id) {
+    global $pdo;
+    $stmt = $pdo->prepare("UPDATE users SET banned_until = NULL WHERE id = ?");
+    $stmt->execute([$id]);
+    self::logAction("Débannissement de l'utilisateur ID " . $id);
+  }
+
   public static function getAdminCount() {
     global $pdo;
     $stmt = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'admin'");
     return $stmt->fetchColumn();
+  }
+
+  public static function getUserCount() {
+    global $pdo;
+    $stmt = $pdo->query("SELECT COUNT(*) FROM users");
+    return $stmt->fetchColumn();
+  }
+
+  public static function getTotalVisits() {
+    global $pdo;
+    $stmt = $pdo->query("SELECT SUM(visit_count) FROM users");
+    return $stmt->fetchColumn() ?? 0;
+  }
+
+  public static function getLiveVisitors() {
+    global $pdo;
+    $timeout = date('Y-m-d H:i:s', strtotime('-5 minutes'));
+    $stmt = $pdo->query("SELECT COUNT(*) FROM users WHERE last_activity > '$timeout'");
+    return $stmt->fetchColumn();
+  }
+
+  public static function getFlaggedMessages() {
+    global $pdo;
+    $forbiddenWords = require 'forbidden_words.php';
+    $wordsPattern = implode('|', array_map('preg_quote', $forbiddenWords));
+    
+    $stmt = $pdo->query("SELECT m.id, m.content, m.created_at, u.username 
+                         FROM messages m 
+                         JOIN users u ON m.user_id = u.id 
+                         WHERE m.content REGEXP '$wordsPattern'
+                         ORDER BY m.created_at DESC");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public static function logAction($action) {
