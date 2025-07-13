@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /PA/source/app/public/
+
+    # Redirige les requêtes vers index.php si le fichier n'existe pas
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+
+    # Force HTTPS (optionnel)
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Bloque l'accès aux fichiers sensibles
+<FilesMatch "\.(env|log|htaccess|sql|ini)$">
+    Deny from all
+</FilesMatch>
+
+# Désactive l'affichage du répertoire
+Options -Indexes
