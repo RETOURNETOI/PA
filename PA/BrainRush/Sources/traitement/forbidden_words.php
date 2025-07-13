@@ -1,10 +1,12 @@
 <?php
 return [
   'insulte',
-  'motinterdit',
-  'grosmot',
-  'haine',
   'racisme',
+  'haine',
   'violence',
-  'discrimination'
+  'discrimination',
+  'injure',
+  'nazi',
+  'hitler',
+  'terrorisme'
 ];
