@@ -13,8 +13,11 @@ class User_model extends CI_Model {
      * @param string $email
      * @return object
      */
-    public function get_user_by_email($email) {
-        return $this->db->get_where('users', array('email' => $email))->row();
+    function getUserByEmail(PDO $pdo, string $email): ?array {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $user ?: null;
     }
 
     /**
@@ -31,9 +34,9 @@ class User_model extends CI_Model {
      * @param array $data
      * @return int
      */
-    public function create_user($data) {
-        $this->db->insert('users', $data);
-        return $this->db->insert_id();
+    function createUser(PDO $pdo, string $username, string $email, string $passwordHash): bool {
+        $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+        return $stmt->execute([$username, $email, $passwordHash]);
     }
 
     /**

@@ -1,42 +1,25 @@
 .dashboard-container {
-    padding: 2rem;
+  max-width: 800px;
+  margin: 5rem auto;
+  padding: 2rem;
+  background-color: #f8fafc;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-.stats-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+.logout-button {
+  margin-top: 2rem;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.card h3 {
-    color: #7f8c8d;
-    margin-bottom: 0.5rem;
-}
-
-.card p {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-.activity-item {
-    background: white;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.activity-item .date {
-    color: #7f8c8d;
-    font-size: 0.9rem;
+.logout-button:hover {
+  background-color: #dc2626;
 }

@@ -1,12 +1,12 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "pa_db";
+<?php //corrigé
+$host = 'localhost';
+$dbname = 'pa_db';
+$user = 'root';
+$pass = '';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Erreur de connexion à la base de données : " . $e->getMessage());
 }
-?>

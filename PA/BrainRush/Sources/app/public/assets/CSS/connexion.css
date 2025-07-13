@@ -338,3 +338,16 @@ body.dark-mode .inscription-link a:hover {
 .captcha-popup .captcha-area {
   margin: 20px 0;
 }
+
+.container { 
+  max-width: 400px; 
+  margin: 2rem auto; 
+  padding: 1rem; 
+  background: #f9f9f9; 
+  border-radius: 5px;
+}
+
+.error { 
+  color: #c00; 
+  margin-bottom: 1rem; 
+}
