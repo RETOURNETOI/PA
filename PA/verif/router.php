@@ -1,5 +1,4 @@
 <?php
-// traitement/routeur/routeur.php - Version finale sécurisée + support 404
 
 $routes = [
     'quizz_solo'  => 'public/quizz_solo.html',
