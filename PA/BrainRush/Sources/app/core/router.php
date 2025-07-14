@@ -26,6 +26,9 @@ class Router {
             elseif (preg_match('/^\/admin\/ban\/(\d+)$/', $path, $matches) && $method === 'POST') {
                 $admin->banUser($matches[1]);
             }
+            elseif ($path === '/admin/notifications' && $method === 'GET') {
+                $admin->viewNotifications();
+            }
         }
         
         // Routes Auth
@@ -35,30 +38,54 @@ class Router {
             if ($path === '/auth/login' && $method === 'GET') {
                 $auth->showLogin();
             }
-            // Ajouter ces routes dans la méthode route()
-elseif ($path === '/search' && $method === 'GET') {
-    $search = new SearchController();
-    $search->searchForum($_GET['q']);
-}
-elseif ($path === '/chat/send' && $method === 'POST') {
-    $chat = new ChatbotController();
-    $chat->handleMessage($_SESSION['user_id'], $_POST['message']);
-}
-elseif ($path === '/auth/forgot-password') {
-    $auth->forgotPassword();
-}
-elseif ($path === '/auth/reset-password') {
-    $auth->resetPassword();
-}
+            elseif ($path === '/auth/login' && $method === 'POST') {
+                $auth->processLogin();
+            }
+            elseif ($path === '/auth/register' && $method === 'GET') {
+                $auth->showRegister();
+            }
+            elseif ($path === '/auth/register' && $method === 'POST') {
+                $auth->processRegister();
+            }
+            elseif ($path === '/auth/logout' && $method === 'GET') {
+                $auth->logout();
+            }
+            elseif ($path === '/auth/forgot-password' && $method === 'GET') {
+                $auth->showForgotPassword();
+            }
+            elseif ($path === '/auth/reset-password' && $method === 'GET') {
+                $auth->showResetPassword();
+            }
+        }
+        
+        // Routes Front
+        else {
+            $front = new FrontController();
+            
+            if ($path === '/' && $method === 'GET') {
+                $front->home();
+            }
+            elseif ($path === '/quizz_solo' && $method === 'GET') {
+                $front->quizzSolo();
+            }
+            elseif ($path === '/vs' && $method === 'GET') {
+                $front->vs();
+            }
+            elseif ($path === '/forum' && $method === 'GET') {
+                $front->forum();
+            }
+            elseif ($path === '/compte' && $method === 'GET') {
+                $front->account();
+            }
+            elseif ($path === '/search' && $method === 'GET') {
+                $front->searchForum($_GET['q']);
+            }
+            elseif ($path === '/chat/send' && $method === 'POST') {
+                $front->handleChatMessage($_SESSION['user_id'], $_POST['message']);
+            }
+            else {
+                $front->notFound();
+            }
         }
     }
-    // Routes chat
-$router->add('/chat/messages', 'GET', 'ChatController', 'getNewMessages');
-$router->add('/chat/send', 'POST', 'ChatController', 'sendMessage');
-
-// Routes notifications
-$router->add('/api/notifications/unread-count', 'GET', 'NotificationController', 'getUnreadCount');
-$router->add('/api/notifications/list', 'GET', 'NotificationController', 'getNotifications');
-$router->add('/api/notifications/mark-read', 'POST', 'NotificationController', 'markAsRead');
 }
-?>

@@ -35,11 +35,16 @@ session_start();
                     <a href="/auth/register">Inscription</a>
                 <?php endif; ?>
             </nav>
+            
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="fr">FR</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
         </div>
     </header>
 
     <main class="main-content">
         <div class="notification-icon">
-    <span id="notification-badge" class="hidden"></span>
-    <div id="notification-panel" class="hidden"></div>
-</div>
+            <span id="notification-badge" class="hidden"></span>
+            <div id="notification-panel" class="hidden"></div>
+        </div>

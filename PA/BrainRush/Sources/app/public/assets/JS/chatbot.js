@@ -49,6 +49,22 @@ const translations = {
   }
 };
 
+// Chatbot responses
+const chatbotResponses = {
+  fr: {
+    help: "Je peux vous aider avec :\n- Règles du jeu\n- Problèmes techniques\n- Suggestions\n- Scores\nPosez-moi une question !",
+    rules: "Les règles sont simples :\n1. Répondez aux questions le plus vite possible\n2. Chaque bonne réponse rapporte des points\n3. Plus vous répondez vite, plus vous gagnez de points !",
+    technical: "Pour les problèmes techniques, veuillez contacter notre support à support@brainrush.com",
+    default: "Désolé, je n'ai pas compris. Tapez 'aide' pour voir ce que je peux faire."
+  },
+  en: {
+    help: "I can help with:\n- Game rules\n- Technical issues\n- Suggestions\n- Scores\nAsk me anything!",
+    rules: "The rules are simple:\n1. Answer questions as fast as you can\n2. Each correct answer gives you points\n3. The faster you answer, the more points you get!",
+    technical: "For technical issues, please contact our support at support@brainrush.com",
+    default: "Sorry, I didn't understand that. Type 'help' to see what I can do."
+  }
+};
+
 window.translations = translations;
 
 window.applyChatbotTheme = function(theme) {
@@ -103,11 +119,11 @@ window.displayChatbotWelcome = function(lang = 'fr', theme = 'light', isConnecte
     btnContainer.className = 'chatbot-button-container';
     
     const loginBtn = document.createElement('a');
-    loginBtn.href = 'connexion.html';
+    loginBtn.href = '/auth/login';
     loginBtn.textContent = translations[lang].loginBtn;
     
     const signupBtn = document.createElement('a');
-    signupBtn.href = 'inscription.html';
+    signupBtn.href = '/auth/register';
     signupBtn.textContent = translations[lang].signupBtn;
     
     btnContainer.appendChild(loginBtn);
@@ -144,6 +160,21 @@ window.translatePage = function(lang) {
   window.displayChatbotWelcome(lang, savedTheme, isConnected);
 };
 
+function processUserMessage(message, lang) {
+  const lowerMsg = message.toLowerCase();
+  const responses = chatbotResponses[lang];
+  
+  if (lowerMsg.includes('aide') || lowerMsg.includes('help')) {
+    return responses.help;
+  } else if (lowerMsg.includes('règle') || lowerMsg.includes('rule')) {
+    return responses.rules;
+  } else if (lowerMsg.includes('technique') || lowerMsg.includes('technical')) {
+    return responses.technical;
+  } else {
+    return responses.default;
+  }
+}
+
 function initChatbot() {
   const theme = localStorage.getItem('theme') || 'light';
   const lang = localStorage.getItem('lang') || 'fr';
@@ -160,19 +191,31 @@ function initChatbot() {
         const chatbox = document.getElementById('chatbox');
         const currentLang = localStorage.getItem('lang') || 'fr';
 
+        // Add user message
         const userMessage = document.createElement('div');
         userMessage.className = 'message user';
         userMessage.textContent = userInput.value;
         chatbox.appendChild(userMessage);
 
+        // Process and add bot response
         const botMessage = document.createElement('div');
         botMessage.className = 'message bot';
-        botMessage.textContent = translations[currentLang].welcomeConnected;
+        botMessage.textContent = processUserMessage(userInput.value, currentLang);
         chatbox.appendChild(botMessage);
         
         userInput.value = '';
         chatbox.scrollTop = chatbox.scrollHeight;
       }
+    });
+  }
+
+  // Toggle chatbot visibility
+  const chatbotIcon = document.getElementById('chatbot-icon');
+  const chatbotBox = document.getElementById('chatbot-box');
+  
+  if (chatbotIcon && chatbotBox) {
+    chatbotIcon.addEventListener('click', () => {
+      chatbotBox.classList.toggle('visible');
     });
   }
 }

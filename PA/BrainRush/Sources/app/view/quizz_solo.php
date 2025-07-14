@@ -1,25 +1,32 @@
 <?php
-// Sources/app/view/quizz_solo.php
-require_once __DIR__.'/../../vendor/autoload.php';
+$pageTitle = "Quizz Solo";
+$cssFiles = ['quizz_solo.css', 'chatbot.css'];
+require_once __DIR__.'/../include/header.php';
+?>
 
-if (isset($_POST['export_pdf'])) {
-    $results = $_SESSION['quiz_results'];
-    
-    $pdf = new \Mpdf\Mpdf();
-    $pdf->SetTitle('Résultats du Quiz');
-    
-    $html = '<h1>Résultats du Quiz</h1>';
-    foreach ($results as $index => $result) {
-        $html .= "<div class='question-result'>
-            <h3>Question ".($index+1)."</h3>
-            <p><strong>Votre réponse:</strong> {$result['user_answer']}</p>
-            <p><strong>Bonne réponse:</strong> {$result['correct_answer']}</p>
-            <p><strong>Statut:</strong> ".($result['is_correct'] ? 'Correct' : 'Incorrect')."</p>
-        </div>";
-    }
-    
-    $pdf->WriteHTML($html);
-    $pdf->Output('quiz_results.pdf', 'D');
-    exit;
-}
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h1>Quizz Solo</h1>
+        <div class="category-selector">
+            <h2>Choisissez une catégorie :</h2>
+            <div class="categories">
+                <div class="category" data-category="math">
+                    <img src="/assets/images/mathematique.png" alt="Mathématiques">
+                    <span>Mathématiques</span>
+                </div>
+                <div class="category" data-category="biology">
+                    <img src="/assets/images/biologie.png" alt="Biologie">
+                    <span>Biologie</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="quiz-questions" id="quizArea">
+        <!-- Les questions seront chargées ici dynamiquement -->
+    </div>
+</div>
+
+<?php 
+$jsFiles = ['quizz_solo.js', 'chatbot.js'];
+require_once __DIR__.'/../include/footer.php';
 ?>
