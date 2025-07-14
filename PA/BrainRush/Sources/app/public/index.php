@@ -1,6 +1,7 @@
 <?php
 session_start();
 $page_title = "Accueil";
+require_once __DIR__ . '/../app/core/router.php';
 require_once 'includes/header.php';
 ?>
 

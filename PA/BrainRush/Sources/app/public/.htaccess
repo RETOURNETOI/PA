@@ -1,21 +1,27 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /PA/source/app/public/
 
-    # Redirige les requêtes vers index.php si le fichier n'existe pas
+    # Chemin de base à adapter selon ton hébergement :
+    # Si OVH pointe directement vers /PA/Sources/app/public/ => alors ceci :
+    RewriteBase /PA/Sources/app/public/
+
+    # Si ton domaine pointe déjà sur /public (cas idéal sur OVH, recommandé) :
+    # RewriteBase /
+
+    # Redirige vers index.php si fichier ou dossier inexistant
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
 
-    # Force HTTPS (optionnel)
+    # Redirection HTTPS (optionnel mais conseillé)
     RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
 # Bloque l'accès aux fichiers sensibles
-<FilesMatch "\.(env|log|htaccess|sql|ini)$">
-    Deny from all
+<FilesMatch "\.(env|log|htaccess|sql|ini|yml)$">
+    Require all denied
 </FilesMatch>
 
-# Désactive l'affichage du répertoire
+# Interdit le listing de répertoires
 Options -Indexes

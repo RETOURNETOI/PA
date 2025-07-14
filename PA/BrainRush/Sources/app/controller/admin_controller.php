@@ -82,3 +82,11 @@ class AdminController {
     $req->execute([$_SESSION['user']['id'], $action]);
   }
 }
+
+function showDashboard() {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: /login");
+        exit;
+    }
+    require_once __DIR__ . '/../view/admin/dashboard.php';
+}

@@ -36,7 +36,7 @@
             <span class="text">Se connecter</span>
           </a>
           
-          <a href="inscription.html" class="navbar-btn primary" id="signupBtn">
+          <a href="../traitement/routeur/routeur.php?page=register" class="navbar-btn primary" id="signupBtn">
             <span class="text">S'inscrire</span>
           </a>
           
