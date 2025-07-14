@@ -1,21 +1,30 @@
-- tout le dossier admin (Kevin C)
-- tout le dossier verif à vérifier et à implémenter dans le code (Kevin C)
-- finaliser le online (Kevin C)
-- intégrer le forum et les pages de versus (1vs1, solo) (Kevin C)
-- mettre à jour la bdd et le fichier routeur.php (Kevin C)
-- finaliser tout le css et le style {optionnel}
-- faire la partie compte (Lance)
-- email lors de l'inscription avec php mailer (Kevin Hu)
-- gestion des erreurs (page 404...) (Lance)
-- mise au point du captcha (Lance)
-- mettre un moteur de recheche dans le forum avec l'api fetch (Kevin C)
-- finaliser le forum (Kevin C)
+TOUT DOIT ÊTRE FROM SCRATCH ET SANS API / DÉPOT GITHUB : https://github.com/RETOURNETOI/PA.git
+- faut que l'admin puisse gérer les utilisateurs du site, voir en temps réel le nombre de visiteur et de comptes créer,  (Kevin C)
+- finir d'intégrer le long polling pour la page VS pour que les utilisateurs puisse faire du 1vs1 en ligne (Kevin C)
 - extraction format pdf resultat questions reponse (avec visu graphique sur chaque question/reponse) {Fin}
-- install de glpi sur le serveur (gestion de ticket, mise en place de classeur excel à partir des logs) [Kevin Hu]
-- mettre un mdp oublié pour connexion (Kevin Hu)
-- finaliser le tchatbot (Kevin C) {optionnel}
-- séparer le html, le css, le js et le php dans des fichiers distinct et réorganiser l'arbo de manière plus simple pour le coté admin avec la méthode MVC (Kevin C)
-- newsletter 
+- finaliser le forum faut que cela paraisse un peu comme un reddit dans lequel les utilisateurs pourront signaler les postes ce qui enverra une notification sur le dashboard de l'administrateur qui lui gèreras le ban ou non (Kevin C)
 - gestion de signalement, tout peut avoir un signalement (compte, message, etc) mais egalement un signalement auto avec une bibliothèque de mots interdit 
 - gérer les bans (avec mails spé pour ça)
+- mettre un moteur de recheche dans le forum (Kevin C)
+- mettre à jour la bdd et le fichier routeur.php (Kevin C)
+- mettre un mdp oublié pour connexion (Kevin C)
+- finaliser le tchatbot, il doit pouvoir lorsque l'utilisateur sera inscrit ou connecter permettre à ce dernier de voir ses messages privé d'autre utilisateurs, gérer les demandes d'ami, d'envoyer des messages au administrateurs si besoin (Kevin C) {optionnel}
+- {intégrer le forum et les pages de versus (1vs1, solo) (Kevin C)} dernière étape
+- finaliser tout le css et le style {optionnel}
+- réorganiser l'arbo de manière plus simple pour le coté admin avec la méthode MVC (Kevin C)
+
+
+----------------------- À FAIRE UNE FOIS TOUT FINI AU DESSUS -----------------------------------------------------
+
+- newsletter 
 - faire la page classement 
+
+
+----------------- SKIP -------------------------------------------------
+
+- faire la partie compte (Lance)
+- gestion des erreurs (page 404...) (Lance)
+- mise au point du captcha (Lance)
+
+- email lors de l'inscription avec php mailer (Kevin Hu)
+- install de glpi sur le serveur (gestion de ticket, mise en place de classeur excel à partir des logs) [Kevin Hu]

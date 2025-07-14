@@ -1,22 +1,45 @@
+<?php
+// Sources/app/include/header.php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $page_title ?? 'Mon Site' ?></title>
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/index.css">
+    <title>BrainRush - <?= $pageTitle ?? 'Jeu Quiz Éducatif' ?></title>
+    <link rel="stylesheet" href="/assets/CSS/main.css">
+    <?php if(isset($cssFiles)): ?>
+        <?php foreach($cssFiles as $cssFile): ?>
+            <link rel="stylesheet" href="/assets/CSS/<?= $cssFile ?>">
+        <?php endforeach; ?>
+    <?php endif; ?>
 </head>
 <body>
-    <nav class="main-nav">
-        <ul>
-            <li><a href="index.php">Accueil</a></li>
-            <?php if (isset($_SESSION['user_id'])): ?>
-                <li><a href="dashboard.php">Dashboard</a></li>
-            <?php else: ?>
-                <li><a href="login.php">Connexion</a></li>
-                <li><a href="register.php">Inscription</a></li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-    <main>
+    <header class="main-header">
+        <div class="container">
+            <a href="/" class="logo">
+                <img src="/assets/images/lion.png" alt="Logo BrainRush">
+                <span>BrainRush</span>
+            </a>
+            
+            <nav class="main-nav">
+                <a href="/quizz_solo">Solo</a>
+                <a href="/vs">1vs1</a>
+                <a href="/forum">Forum</a>
+                <?php if(isset($_SESSION['user_id'])): ?>
+                    <a href="/compte">Mon Compte</a>
+                    <a href="/logout">Déconnexion</a>
+                <?php else: ?>
+                    <a href="/auth/login">Connexion</a>
+                    <a href="/auth/register">Inscription</a>
+                <?php endif; ?>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="notification-icon">
+    <span id="notification-badge" class="hidden"></span>
+    <div id="notification-panel" class="hidden"></div>
+</div>

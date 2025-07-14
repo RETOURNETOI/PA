@@ -1,32 +1,51 @@
-<?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../auth/login.php");
-    exit;
-}
-?>
+<!-- Sources/admin/views/dashboard.php -->
+<?php require_once __DIR__.'/../../../app/include/header_dashboard.php'; ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="../../public/assets/CSS/index.css">
-    <link rel="stylesheet" href="../../public/assets/CSS/main.css">
-    <link rel="stylesheet" href="../../public/assets/CSS/dashboard.css">
-</head>
-<body>
-
-    <div class="dashboard-container">
-        <h1>Bienvenue sur votre tableau de bord</h1>
-        <p>Vous êtes connecté avec succès.</p>
-        <form action="../../lougout.php" method="POST">
-            <button type="submit" class="logout-button">Se déconnecter</button>
-        </form>
+<div class="admin-container">
+    <h1>Tableau de bord administrateur</h1>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Utilisateurs total</h3>
+            <p><?= $data['total_users'] ?></p>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Utilisateurs actifs</h3>
+            <p><?= $data['active_users'] ?></p>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Visites aujourd'hui</h3>
+            <p><?= $data['today_visits'] ?></p>
+        </div>
     </div>
 
-    <script src="../../public/assets/JS/index.js"></script>
-    <script src="../../public/assets/JS/main.js"></script>
-    <script src="../../public/assets/JS/dashboard.js"></script>
-</body>
-</html>
+    <section class="reports-section">
+        <h2>Signalements en attente</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Contenu</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($data['reports'] as $report): ?>
+                <tr>
+                    <td><?= $report['id'] ?></td>
+                    <td><?= $report['content_type'] ?></td>
+                    <td><?= substr($report['content'], 0, 50) ?>...</td>
+                    <td>
+                        <a href="/admin/review/<?= $report['id'] ?>">Examiner</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+<?php require_once __DIR__.'/../../../app/include/footer.php'; ?>

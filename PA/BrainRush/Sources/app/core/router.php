@@ -1,47 +1,64 @@
 <?php
-session_start();
+// Sources/app/core/router.php
+require_once __DIR__.'/../controller/admin_controller.php';
+require_once __DIR__.'/../controller/auth_controller.php';
+require_once __DIR__.'/../controller/front_controller.php';
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+class Router {
+    public function __construct() {
+        $this->route();
+    }
 
-// Nettoie et supprime les éventuels `/Sources/` ou `/public/` de l’URL
-$uri = str_replace(['/BrainRush', '/public', '/Sources'], '', $uri);
-$uri = trim($uri, '/');
+    private function route() {
+        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $method = $_SERVER['REQUEST_METHOD'];
 
-// Liste des routes
-switch ($uri) {
-
-    // ACCUEIL
-    case '':
-    case 'index':
-        require_once __DIR__ . '/../controller/front_controller.php';
-        showHome();
-        break;
-
-    // AUTH
-    case 'login':
-        require_once __DIR__ . '/../controller/auth_controller.php';
-        showLogin();
-        break;
-
-    case 'register':
-        require_once __DIR__ . '/../controller/auth_controller.php';
-        showRegister();
-        break;
-
-    case 'logout':
-        require_once __DIR__ . '/../controller/auth_controller.php';
-        logout();
-        break;
-
-    // DASHBOARD
-    case 'dashboard':
-        require_once __DIR__ . '/../controller/admin_controller.php';
-        showDashboard();
-        break;
-
-    // 404 - non trouvé
-    default:
-        http_response_code(404);
-        echo "<h1>404 - Page non trouvée</h1>";
-        break;
+        // Routes Admin
+        if (strpos($path, '/admin') === 0) {
+            $admin = new AdminController();
+            
+            if ($path === '/admin/dashboard' && $method === 'GET') {
+                $admin->dashboard();
+            }
+            elseif ($path === '/admin/users' && $method === 'GET') {
+                $admin->manageUsers();
+            }
+            elseif (preg_match('/^\/admin\/ban\/(\d+)$/', $path, $matches) && $method === 'POST') {
+                $admin->banUser($matches[1]);
+            }
+        }
+        
+        // Routes Auth
+        elseif (strpos($path, '/auth') === 0) {
+            $auth = new AuthController();
+            
+            if ($path === '/auth/login' && $method === 'GET') {
+                $auth->showLogin();
+            }
+            // Ajouter ces routes dans la méthode route()
+elseif ($path === '/search' && $method === 'GET') {
+    $search = new SearchController();
+    $search->searchForum($_GET['q']);
 }
+elseif ($path === '/chat/send' && $method === 'POST') {
+    $chat = new ChatbotController();
+    $chat->handleMessage($_SESSION['user_id'], $_POST['message']);
+}
+elseif ($path === '/auth/forgot-password') {
+    $auth->forgotPassword();
+}
+elseif ($path === '/auth/reset-password') {
+    $auth->resetPassword();
+}
+        }
+    }
+    // Routes chat
+$router->add('/chat/messages', 'GET', 'ChatController', 'getNewMessages');
+$router->add('/chat/send', 'POST', 'ChatController', 'sendMessage');
+
+// Routes notifications
+$router->add('/api/notifications/unread-count', 'GET', 'NotificationController', 'getUnreadCount');
+$router->add('/api/notifications/list', 'GET', 'NotificationController', 'getNotifications');
+$router->add('/api/notifications/mark-read', 'POST', 'NotificationController', 'markAsRead');
+}
+?>
