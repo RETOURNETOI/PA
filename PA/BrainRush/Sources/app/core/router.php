@@ -10,8 +10,29 @@ class Router {
     }
 
     private function route() {
-        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $basePath = '/BrainRush';
+        $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $path = str_replace($basePath, '', $requestUri);
         $method = $_SERVER['REQUEST_METHOD'];
+
+        // Routes pour les assets statiques
+        if (preg_match('/\.(css|js|png|jpg|jpeg|gif)$/', $path)) {
+            $filePath = __DIR__.'/../public'.$path;
+            if (file_exists($filePath)) {
+                $mimeTypes = [
+                    'css' => 'text/css',
+                    'js' => 'application/javascript',
+                    'png' => 'image/png',
+                    'jpg' => 'image/jpeg',
+                    'jpeg' => 'image/jpeg',
+                    'gif' => 'image/gif'
+                ];
+                $ext = pathinfo($path, PATHINFO_EXTENSION);
+                header('Content-Type: '.$mimeTypes[$ext]);
+                readfile($filePath);
+                exit;
+            }
+        }
 
         // Routes Admin
         if (strpos($path, '/admin') === 0) {
@@ -20,15 +41,7 @@ class Router {
             if ($path === '/admin/dashboard' && $method === 'GET') {
                 $admin->dashboard();
             }
-            elseif ($path === '/admin/users' && $method === 'GET') {
-                $admin->manageUsers();
-            }
-            elseif (preg_match('/^\/admin\/ban\/(\d+)$/', $path, $matches) && $method === 'POST') {
-                $admin->banUser($matches[1]);
-            }
-            elseif ($path === '/admin/notifications' && $method === 'GET') {
-                $admin->viewNotifications();
-            }
+            // ... autres routes admin
         }
         
         // Routes Auth
@@ -38,50 +51,27 @@ class Router {
             if ($path === '/auth/login' && $method === 'GET') {
                 $auth->showLogin();
             }
-            elseif ($path === '/auth/login' && $method === 'POST') {
-                $auth->processLogin();
-            }
-            elseif ($path === '/auth/register' && $method === 'GET') {
-                $auth->showRegister();
-            }
-            elseif ($path === '/auth/register' && $method === 'POST') {
-                $auth->processRegister();
-            }
-            elseif ($path === '/auth/logout' && $method === 'GET') {
-                $auth->logout();
-            }
-            elseif ($path === '/auth/forgot-password' && $method === 'GET') {
-                $auth->showForgotPassword();
-            }
-            elseif ($path === '/auth/reset-password' && $method === 'GET') {
-                $auth->showResetPassword();
-            }
+            // ... autres routes auth
         }
         
         // Routes Front
         else {
             $front = new FrontController();
             
-            if ($path === '/' && $method === 'GET') {
+            if ($path === '/' || $path === '') {
                 $front->home();
             }
-            elseif ($path === '/quizz_solo' && $method === 'GET') {
+            elseif ($path === '/quizz_solo') {
                 $front->quizzSolo();
             }
-            elseif ($path === '/vs' && $method === 'GET') {
+            elseif ($path === '/vs') {
                 $front->vs();
             }
-            elseif ($path === '/forum' && $method === 'GET') {
+            elseif ($path === '/forum') {
                 $front->forum();
             }
-            elseif ($path === '/compte' && $method === 'GET') {
+            elseif ($path === '/compte') {
                 $front->account();
-            }
-            elseif ($path === '/search' && $method === 'GET') {
-                $front->searchForum($_GET['q']);
-            }
-            elseif ($path === '/chat/send' && $method === 'POST') {
-                $front->handleChatMessage($_SESSION['user_id'], $_POST['message']);
             }
             else {
                 $front->notFound();

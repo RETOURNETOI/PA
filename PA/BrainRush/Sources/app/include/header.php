@@ -1,6 +1,7 @@
 <?php
 // Sources/app/include/header.php
 session_start();
+$baseUrl = '/BrainRush';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -8,31 +9,31 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainRush - <?= $pageTitle ?? 'Jeu Quiz Éducatif' ?></title>
-    <link rel="stylesheet" href="/assets/CSS/main.css">
+    <link rel="stylesheet" href="<?= $baseUrl ?>/Sources/app/public/assets/CSS/main.css">
     <?php if(isset($cssFiles)): ?>
         <?php foreach($cssFiles as $cssFile): ?>
-            <link rel="stylesheet" href="/assets/CSS/<?= $cssFile ?>">
+            <link rel="stylesheet" href="<?= $baseUrl ?>/Sources/app/public/assets/CSS/<?= $cssFile ?>">
         <?php endforeach; ?>
     <?php endif; ?>
 </head>
 <body>
     <header class="main-header">
         <div class="container">
-            <a href="/" class="logo">
-                <img src="/assets/images/lion.png" alt="Logo BrainRush">
+            <a href="<?= $baseUrl ?>/" class="logo">
+                <img src="<?= $baseUrl ?>/Sources/app/public/assets/images/lion.png" alt="Logo BrainRush">
                 <span>BrainRush</span>
             </a>
             
             <nav class="main-nav">
-                <a href="/quizz_solo">Solo</a>
-                <a href="/vs">1vs1</a>
-                <a href="/forum">Forum</a>
+                <a href="<?= $baseUrl ?>/quizz_solo">Solo</a>
+                <a href="<?= $baseUrl ?>/vs">1vs1</a>
+                <a href="<?= $baseUrl ?>/forum">Forum</a>
                 <?php if(isset($_SESSION['user_id'])): ?>
-                    <a href="/compte">Mon Compte</a>
-                    <a href="/logout">Déconnexion</a>
+                    <a href="<?= $baseUrl ?>/compte">Mon Compte</a>
+                    <a href="<?= $baseUrl ?>/logout">Déconnexion</a>
                 <?php else: ?>
-                    <a href="/auth/login">Connexion</a>
-                    <a href="/auth/register">Inscription</a>
+                    <a href="<?= $baseUrl ?>/auth/login">Connexion</a>
+                    <a href="<?= $baseUrl ?>/auth/register">Inscription</a>
                 <?php endif; ?>
             </nav>
             

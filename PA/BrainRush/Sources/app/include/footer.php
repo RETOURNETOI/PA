@@ -23,10 +23,10 @@
         </div>
     </footer>
 
-    <script src="/assets/JS/main.js"></script>
+    <script src="<?= $baseUrl ?>/Sources/app/public/assets/JS/main.js"></script>
     <?php if(isset($jsFiles)): ?>
         <?php foreach($jsFiles as $jsFile): ?>
-            <script src="/assets/JS/<?= $jsFile ?>"></script>
+            <script src="<?= $baseUrl ?>/Sources/app/public/assets/JS/<?= $jsFile ?>"></script>
         <?php endforeach; ?>
     <?php endif; ?>
 </body>

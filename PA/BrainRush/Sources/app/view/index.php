@@ -1,155 +1,101 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BrainRush - Accueil</title>
-    <link rel="stylesheet" href="../CSS/index.css">
-    <link rel="stylesheet" href="../CSS/chatbot.css">
-    <link rel="stylesheet" href="../CSS/main.css">
-  </head>
-  <body class="light-background">
+<?php
+// Sources/app/view/index.php
 
-    <nav class="custom-navbar">
-      <div class="navbar-container">
-        <a href="index.html" class="navbar-brand">🧠 BrainRush</a>
-        
-        <ul class="navbar-links" id="navbar-menu">
-          <li><a href="index.html" id="navHome">Accueil</a></li>
-          <li><a href="../traitement/routeur/routeur.php?page=quizz_solo" id="navSolo">Solo</a></li>
-          <li><a href="../traitement/routeur/routeur.php?page=vs" id="navVS">VS</a></li>
-          <li><a href="../traitement/routeur/routeur.php?page=classement" id="navRank">Classement</a></li>
-          <li><a href="../traitement/routeur/routeur.php?page=tournois" id="navTournament">Tournois</a></li>
-          <li><a href="../traitement/routeur/routeur.php?page=forum" id="navForum">Forum</a></li>
-        </ul>
-        
-        <div class="navbar-actions">
-          <button id="langToggle" class="navbar-btn icon" title="Changer la langue">
-           <span id="langIcon">🇫🇷</span>
-          </button>
-          
-          <button id="themeToggle" class="navbar-btn icon" title="Changer le thème">
-            🌙
-          </button>
-          
-          <a href="connexion.html" class="navbar-btn secondary" id="loginBtn">
-            <span class="text">Se connecter</span>
-          </a>
-          
-          <a href="../traitement/routeur/routeur.php?page=register" class="navbar-btn primary" id="signupBtn">
-            <span class="text">S'inscrire</span>
-          </a>
-          
-          <div href="compte.html" class="avatar-container">
-            <img src="../assets/avatar_def1.png" alt="Profil" class="avatar-icon">
-          </div>
-        </div>
-      </div>
-    </nav>
+// Définition des métadonnées et inclusions
+$pageTitle = "Accueil";
+$cssFiles = ['index.css', 'chatbot.css'];
+$jsFiles = ['index.js', 'chatbot.js'];
 
-    <header class="bg-primary text-white text-center py-5">
-      <div class="container">
+// Chemin de base dynamique pour MAMP
+$basePath = '/BrainRush';
+$isLocal = ($_SERVER['SERVER_NAME'] === 'localhost' || strpos($_SERVER['SERVER_NAME'], '.local') !== false);
+$assetsPath = $isLocal ? $basePath.'/Sources/app/public/assets' : '/assets';
+
+// Démarrer la session si pas déjà fait
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Inclure le header
+require_once __DIR__.'/../include/header.php';
+?>
+
+<!-- Section Hero -->
+<section class="bg-primary text-white text-center py-5">
+    <div class="container">
         <h1 class="display-4" id="welcomeTitle">Bienvenue sur BrainRush !</h1>
         <p class="lead" id="welcomeSubtitle">Testez vos connaissances, affrontez vos amis, grimpez dans le classement !</p>
-      </div>
-    </header>
+    </div>
+</section>
 
-    <section class="container text-center py-5" id="rubriques">
-      <div class="row g-4">
+<!-- Section Options de Jeu -->
+<section class="container text-center py-5" id="game-options">
+    <div class="row g-4">
         <div class="col-md-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body">
-              <h5 class="card-title" id="soloTitle">🧠 Quizz Solo</h5>
-              <p class="card-text" id="soloDesc">Jouez en solo sur des dizaines de thèmes !</p>
-              <a href="../traitement/routeur/routeur.php?page=quizz_solo" class="btn btn-outline-primary" id="soloBtn">Commencer</a>
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title" id="soloTitle">🧠 Quizz Solo</h5>
+                    <p class="card-text" id="soloDesc">Jouez en solo sur des dizaines de thèmes !</p>
+                    <a href="<?= $basePath ?>/quizz_solo" class="btn btn-outline-primary" id="soloBtn">Commencer</a>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body">
-              <h5 class="card-title" id="vsTitle">⚔️ Quizz VS</h5>
-              <p class="card-text" id="vsDesc">Affrontez vos amis en temps réel.</p>
-              <a href="../traitement/routeur/routeur.php?page=vs" class="btn btn-outline-danger" id="vsBtn">Défier</a>
-            </div>
-          </div>
         </div>
         <div class="col-md-4">
-          <div class="card shadow-sm h-100">
-            <div class="card-body">
-              <h5 class="card-title" id="rankTitle">🏆 Classement</h5>
-              <p class="card-text" id="rankDesc">Découvrez les meilleurs joueurs.</p>
-              <a href="../traitement/routeur/routeur.php?page=classement" class="btn btn-outline-success" id="rankBtn">Voir</a>
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title" id="vsTitle">⚔️ Quizz VS</h5>
+                    <p class="card-text" id="vsDesc">Affrontez vos amis en temps réel.</p>
+                    <a href="<?= $basePath ?>/vs" class="btn btn-outline-danger" id="vsBtn">Défier</a>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="row g-4 md-4">
-        <div class="col-md-4 mx-auto">
-          <div class="card shadow-sm h-100">
-            <div class="card-body">
-              <h5 class="card-title" id="tournoisTitle">🏆 Tournois</h5>
-              <p class="card-text" id="tournoisDesc">Découvrez un tout nouveau niveau.</p>
-              <a href="../traitement/routeur/routeur.php?page=tournois" class="btn btn-outline-success" id="tournoisBtn">Participer</a>
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title" id="rankTitle">🏆 Classement</h5>
+                    <p class="card-text" id="rankDesc">Découvrez les meilleurs joueurs.</p>
+                    <a href="<?= $basePath ?>/classement" class="btn btn-outline-success" id="rankBtn">Voir</a>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section class="container text-center py-5">
-      <div class="section-title">
-        <h2 id="podiumTitle">🏆 Podium des 3 MVP All-Time</h2>
-      </div>
-
-      <div class="podium">
+<!-- Section Podium -->
+<section class="container text-center py-5">
+    <h2 id="podiumTitle">🏆 Podium des 3 MVP All-Time</h2>
+    
+    <div class="podium">
         <div class="step second">
-          <div class="avatar"><img src="../assets/lion.png" alt="Avatar 2"></div>
-          <div class="block">2</div>
-          <div class="info">
-            <p class="pseudo">Pseudo2</p>
-            <p class="points">⚡ 8900 pts</p>
-          </div>
+            <div class="avatar"><img src="<?= $assetsPath ?>/images/lion.png" alt="2ème place"></div>
+            <div class="block">2</div>
+            <div class="info">
+                <p class="pseudo">Joueur2</p>
+                <p class="points">⚡ 8900 pts</p>
+            </div>
         </div>
 
         <div class="step first">
-          <div class="avatar"><img src="../assets/avatar_def1.png" alt="Avatar 1"></div>
-          <div class="block">1</div>
-          <div class="info">
-            <p class="pseudo">Pseudo1</p>
-            <p class="points">🌟 10250 pts</p>
-          </div>
+            <div class="avatar"><img src="<?= $assetsPath ?>/images/avatar_def1.png" alt="1ère place"></div>
+            <div class="block">1</div>
+            <div class="info">
+                <p class="pseudo">Joueur1</p>
+                <p class="points">🌟 10250 pts</p>
+            </div>
         </div>
 
         <div class="step third">
-          <div class="avatar"><img src="../assets/tigre.png" alt="Avatar 3"></div>
-          <div class="block">3</div>
-          <div class="info">
-            <p class="pseudo">Pseudo3</p>
-            <p class="points">🔥 8450 pts</p>
-          </div>
+            <div class="avatar"><img src="<?= $assetsPath ?>/images/tigre.png" alt="3ème place"></div>
+            <div class="block">3</div>
+            <div class="info">
+                <p class="pseudo">Joueur3</p>
+                <p class="points">🔥 8450 pts</p>
+            </div>
         </div>
-      </div>
-    </section>
-
-    <footer class="bg-dark text-white text-center py-3">
-      <p class="mb-0" id="footerText">© 2025 BrainRush. Tous droits réservés.</p>
-    </footer>
-  
-    <div id="chatbot-box" class="hidden">
-      <div id="chatbox" class="chatbox-content">
-      </div>
-      <div class="chatbox-input">
-        <input type="text" id="userInput" placeholder="Écris ton message..." />
-      </div>
-      <button id="close-chatbot" class="close-chatbot">×</button>
     </div>
+</section>
 
-    <button id="chatbot-icon" class="chatbot-open-button">
-      💬
-    </button>
-    <script src="../JS/index.js"></script>
-    <script src="../JS/chatbot.js"></script>
-    <script src="../JS/main.js"></script>
-  </body>
-</html>
+<?php
+// Inclure le footer
+require_once __DIR__.'/../include/footer.php';
+?>
