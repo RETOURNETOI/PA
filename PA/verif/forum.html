@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrainRush - Forum</title>
+<link rel="stylesheet" href="forum.css">
+</head>
+<body class="light-background">
+  <nav class="navbar">
+    <div>
+      <a href="#" class="navbar-brand">🧠 BrainRush</a>
+    </div>
+    
+    <ul class="navbar-nav">
+      <li><a href="#" class="nav-link">Quizz Solo</a></li>
+      <li><a href="#" class="nav-link">VS</a></li>
+      <li><a href="#" class="nav-link">Classement</a></li>
+      <li><a href="#" class="nav-link">Tournois</a></li>
+      <li><a href="#" class="nav-link active">Forum</a></li>
+    </ul>
+    
+    <div class="navbar-tools">
+      <button class="btn btn-outline-light" id="langToggle">
+        <span>🌐</span>
+      </button>
+      <button class="btn btn-outline-light" id="themeToggle">🌙</button>
+      <a href="#" class="btn btn-outline-light">Connexion</a>
+      <a href="#" class="btn btn-primary">Inscription</a>
+      <a href="#">
+        <div class="avatar">U</div>
+      </a>
+    </div>
+  </nav>
+
+  <header class="forum-header">
+    <div class="container">
+      <h1>Forum BrainRush</h1>
+      <p>Discutez, échangez et partagez vos connaissances avec la communauté !</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="#">Accueil</a> &raquo; <span>Forum</span>
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="categories-grid">
+          <div class="category-card">
+            <div class="category-icon">🧠</div>
+            <h3 class="category-title">Quiz & Stratégies</h3>
+            <p class="category-description">Discutez des meilleures stratégies, partagez des astuces et posez vos questions sur les quiz.</p>
+            <div class="category-stats">
+              <span class="badge bg-primary">5 sujets</span>
+              <span class="badge bg-success">32 messages</span>
+            </div>
+            <div class="category-footer">Dernier message: il y a 2 heures par QuizMaster42</div>
+          </div>
+          
+          <div class="category-card">
+            <div class="category-icon">🏆</div>
+            <h3 class="category-title">Tournois & Compétitions</h3>
+            <p class="category-description">Organisez des tournois, discutez des résultats et des prochains événements.</p>
+            <div class="category-stats">
+              <span class="badge bg-primary">2 sujets</span>
+              <span class="badge bg-success">17 messages</span>
+            </div>
+            <div class="category-footer">Dernier message: il y a 5 heures par ChampionDu67</div>
+          </div>
+          
+          <div class="category-card">
+            <div class="category-icon">👥</div>
+            <h3 class="category-title">Communauté & Rencontres</h3>
+            <p class="category-description">Présentez-vous, trouvez des partenaires de jeu et discutez avec la communauté.</p>
+            <div class="category-stats">
+              <span class="badge bg-primary">6 sujets</span>
+              <span class="badge bg-success">41 messages</span>
+            </div>
+            <div class="category-footer">Dernier message: il y a 1 heure par NewPlayer23</div>
+          </div>
+          
+          <div class="category-card">
+            <div class="category-icon">💡</div>
+            <h3 class="category-title">Suggestions & Idées</h3>
+            <p class="category-description">Proposez vos idées pour améliorer BrainRush et votez pour les meilleures suggestions.</p>
+            <div class="category-stats">
+              <span class="badge bg-primary">7 sujets</span>
+              <span class="badge bg-success">26 messages</span>
+            </div>
+            <div class="category-footer">Dernier message: il y a 3 heures par IdeaGenerator</div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">🔥 Sujets populaires</h2>
+            <div>
+              <button class="btn btn-outline-light">Nouveaux</button>
+              <button class="btn btn-primary">Populaires</button>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <ul class="topic-list">
+              <li class="topic-item">
+                <a href="#" class="topic-title">Comment battre le niveau expert de culture générale ?</a>
+                <div class="topic-meta">Posté par <strong>QuizMaster42</strong> dans <span class="badge bg-primary">Quiz & Stratégies</span> • Il y a 3 heures</div>
+                <div class="topic-info">
+                  <div class="last-post">
+                    <div class="last-post-avatar">BG</div>
+                    <div class="last-post-info">
+                      <div>Dernière réponse par <span class="last-post-author">BrainyGirl</span></div>
+                      <div class="text-muted">Il y a 15 minutes</div>
+                    </div>
+                  </div>
+                  <div class="topic-stats">
+                    <div class="topic-count">1</div>
+                    <div class="topic-label">réponses</div>
+                  </div>
+                </div>
+              </li>
+              
+              <li class="topic-item">
+                <a href="#" class="topic-title">Prochain tournoi mensuel - Inscriptions ouvertes !</a>
+                <div class="topic-meta">Posté par <strong>AdminBrain</strong> dans <span class="badge bg-success">Tournois & Compétitions</span> • Hier</div>
+                <div class="topic-info">
+                  <div class="last-post">
+                    <div class="last-post-avatar">QL</div>
+                    <div class="last-post-info">
+                      <div>Dernière réponse par <span class="last-post-author">QuizLover</span></div>
+                      <div class="text-muted">Il y a 2 heures</div>
+                    </div>
+                  </div>
+                  <div class="topic-stats">
+                    <div class="topic-count">8</div>
+                    <div class="topic-label">réponses</div>
+                  </div>
+                </div>
+              </li>
+              
+              <li class="topic-item">
+                <a href="#" class="topic-title">[Idée] Nouvelle catégorie de quiz : Histoire des sciences</a>
+                <div class="topic-meta">Posté par <strong>ScienceGeek</strong> dans <span class="badge bg-primary">Suggestions & Idées</span> • Il y a 1 jour</div>
+                <div class="topic-info">
+                  <div class="last-post">
+                    <div class="last-post-avatar">HB</div>
+                    <div class="last-post-info">
+                      <div>Dernière réponse par <span class="last-post-author">HistoryBuff</span></div>
+                      <div class="text-muted">Il y a 3 heures</div>
+                    </div>
+                  </div>
+                  <div class="topic-stats">
+                    <div class="topic-count">7</div>
+                    <div class="topic-label">réponses</div>
+                  </div>
+                </div>
+              </li>
+              
+              <li class="topic-item">
+                <a href="#" class="topic-title">Recherche partenaire pour duo VS</a>
+                <div class="topic-meta">Posté par <strong>DuoSeeker</strong> dans <span class="badge bg-success">Communauté & Rencontres</span> • Il y a 2 jours</div>
+                <div class="topic-info">
+                  <div class="last-post">
+                    <div class="last-post-avatar">VP</div>
+                    <div class="last-post-info">
+                      <div>Dernière réponse par <span class="last-post-author">VSPlayer</span></div>
+                      <div class="text-muted">Il y a 4 heures</div>
+                    </div>
+                  </div>
+                  <div class="topic-stats">
+                    <div class="topic-count">42</div>
+                    <div class="topic-label">réponses</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="card-header">
+            <a href="#" class="btn btn-primary">Voir plus de sujets</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3">
+        <div class="stats-card">
+          <h3>Statistiques du forum</h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value">13</div>
+              <div class="stat-label">Sujets</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">76</div>
+              <div class="stat-label">Messages</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">42</div>
+              <div class="stat-label">Membres</div>
+            </div>
+          </div>
+          
+          <h3>Membres actifs</h3>
+          <div class="active-users">
+            <div class="user-avatar">AL</div>
+            <div class="user-avatar">DC</div>
+            <div class="user-avatar">KC</div>
+            <div class="user-avatar">KH</div>
+            <div class="user-avatar">BL</div>
+            <div class="user-avatar">DH</div>
+            <div class="badge bg-primary">+12 autres</div>
+          </div>
+        </div>
+        
+        <div class="stats-card">
+          <h3>Nouveaux membres</h3>
+          <div class="user-item">
+            <div class="user-avatar">QN</div>
+            <div>
+              <div>QuizNewbie</div>
+              <small class="text-muted">Inscrit aujourd'hui</small>
+            </div>
+          </div>
+          <div class="user-item">
+            <div class="user-avatar">BM</div>
+            <div>
+              <div>BrainMaster99</div>
+              <small class="text-muted">Inscrit hier</small>
+            </div>
+          </div>
+          <div class="user-item">
+            <div class="user-avatar">KS</div>
+            <div>
+              <div>KnowledgeSeeker</div>
+              <small class="text-muted">Inscrit il y a 2 jours</small>
+            </div>
+          </div>
+        </div>
+        
+        <div class="stats-card">
+          <h3>Règles du forum</h3>
+          <ul class="rules-list">
+            <li><span class="rule-icon">✓</span> Soyez respectueux</li>
+            <li><span class="rule-icon">✓</span> Pas de spam</li>
+            <li><span class="rule-icon">✓</span> Postez dans la bonne catégorie</li>
+            <li><span class="rule-icon">✓</span> Recherchez avant de poster</li>
+            <li><span class="rule-icon">✓</span> Pas de contenu inapproprié</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 BrainRush. Tous droits réservés.</p>
+  </footer>
+
+  <button class="new-topic-btn" title="Créer un nouveau sujet">+</button>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-theme');
+      themeToggle.textContent = body.classList.contains('dark-theme') ? '☀️' : '🌙';
+      
+      const isDark = body.classList.contains('dark-theme');
+      localStorage.setItem('darkTheme', isDark);
+    });
+    
+    if (localStorage.getItem('darkTheme') === 'true') {
+      body.classList.add('dark-theme');
+      themeToggle.textContent = '☀️';
+    }
+    function generateRandomTopics() {
+      const topicTitles = [
+        "Meilleures stratégies pour le mode VS",
+        "Classement mensuel - résultats",
+        "Problème technique : connexion intermittente",
+        "Idée : quiz sur l'histoire du jeu vidéo",
+        "Tournoi d'été - suggestions de thèmes",
+        "Recherche équipe pour tournoi par équipe"
+      ];
+      
+      const topicAuthors = [
+        "StrategyGuru", "QuizMaster42", "AdminBrain", "TechHelper", "GamerGeek",
+        "FastPlayer", "SummerTourney", "TeamSeeker"
+      ];
+      
+      const topicCategories = [
+        "Quiz & Stratégies", "Quiz & Stratégies", "Tournois & Compétitions", 
+        "Support Technique", "Suggestions & Idées", "Quiz & Stratégies",
+        "Tournois & Compétitions", "Communauté & Rencontres"
+      ];
+      
+      const topicBadges = ["bg-primary", "bg-success"];
+      
+      const topicList = document.querySelector('.topic-list');
+      
+      <!-- 🧠 Chatbot box -->
+    <div id="chatbot-box" class="hidden">
+      <div id="chatbox" class="chatbox-content">
+        <!-- Les messages apparaîtront ici -->
+      </div>
+      <div class="chatbox-input">
+        <input type="text" id="userInput" placeholder="Écris ton message..." />
+      </div>
+      <button id="close-chatbot" class="close-chatbot">×</button>
+    </div>
+
+    
+      <!-- 🧠 Chatbot icon bouton flottant -->
+    <button id="chatbot-icon" class="chatbot-open-button">
+      💬
+    </button>
+    <script src="js/index.js"></script>
+    <script src="js/chatbot.js"></script>
+}
+  </script>
+</body>
+</html>

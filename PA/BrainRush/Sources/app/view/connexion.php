@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Connexion - BrainRush</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/index.css">
+    <link rel="stylesheet" href="../CSS/connexion.css">
+    <link rel="stylesheet" href="../CSS/chatbot.css">
+    <link rel="stylesheet" href="../CSS/main.css">
+</head>
+<body>
+    <nav class="custom-navbar">
+      <div class="navbar-container">
+        <a href="index.html" class="navbar-brand">🧠 BrainRush</a>
+        
+        <ul class="navbar-links" id="navbar-menu">
+          <li><a href="index.html" id="navHome">Accueil</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=quizz_solo" id="navSolo">Solo</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=vs" id="navVS">VS</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=classement" id="navRank">Classement</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=tournois" id="navTournois">Tournois</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=forum" id="navForum">Forum</a></li>
+        </ul>
+        
+        <div class="navbar-actions">
+          <button id="langToggle" class="navbar-btn icon" title="Changer la langue">
+           <span id="langIcon">🇫🇷</span>
+          </button>
+          
+          <button id="themeToggle" class="navbar-btn icon" title="Changer le thème">
+            🌙
+          </button>
+          
+          <a href="connexion.html" class="navbar-btn secondary" id="loginBtn">
+            <span class="text">Se connecter</span>
+          </a>
+          
+          <a href="inscription.html" class="navbar-btn primary" id="signupBtn">
+            <span class="text">S'inscrire</span>
+          </a>
+          
+          <div href="../traitement/routeur/routeur.php?page=avatar" class="avatar-container">
+            <img src="../assets/avatar_def1.png" alt="Profil" class="avatar-icon">
+          </div>
+        </div>
+        
+        <button class="navbar-toggle" id="navbar-toggle">
+          ☰
+        </button>
+      </div>
+    </nav>
+
+    <div class="connexion-wrapper">
+        <div class="login-container">
+            <h2 id="title">🔐 Connexion</h2>
+            <form id="loginForm" action="../traitement/connexion/connexion_traitement.php" method="POST">
+                <div class="form-group">
+                    <label for="emailInput">Adresse email</label>
+                    <input type="email" id="emailInput" name="email" class="form-control" placeholder="Entrez votre email" required>
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput">Mot de passe</label>
+                    <input type="password" id="passwordInput" name="password" class="form-control" placeholder="Entrez votre mot de passe" required>
+                </div>
+            </form>
+            <div class="inscription-link" id="signupLine">
+                <a href="../traitement/routeur/routeur.php?page=inscription">Vous n'avez pas de compte ? Inscrivez-vous</a>
+            </div>
+        </div>
+    </div>
+
+    <button id="evil-button">Connexion</button>
+        </div>
+    </div>
+    <div id="captcha-popup" class="captcha-popup">
+      <div class="captcha-content">
+        <span class="close-captcha">&times;</span>
+      <div class="wrapper">
+        <header>Vérification CAPTCHA</header>
+        <div class="captcha-area">
+          <div class="captcha-img">
+            <img src="../assets/captcha-bg.png" alt="Captch Background">
+            <span class="captcha"></span>
+          </div>
+          <button class="reload-btn"><i class="fas fa-redo-alt"></i></button>
+        </div>
+        <form class="input-area">
+          <input type="text" placeholder="Enter captcha" maxlength="6" spellcheck="false" required>
+          <button class="check-btn">Vérifier</button>
+        </form>
+        <div class="status-text"></div>
+      </div>
+    </div>
+  </div>
+
+    <script src="../JS/connexion.js"></script>
+    <script src="../JS/chatbot.js"></script>
+    <script src="../JS/main.js"></script>
+</body>
+</html>
