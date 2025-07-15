@@ -1,31 +1,21 @@
-<?php require_once __DIR__.'/../include/header.php'; ?>
+<?php 
+$pageTitle = "Classement";
+$cssFiles = ['classement.css', 'chatbot.css'];
+$baseUrl = '/BrainRush/BrainRush'; 
+require_once __DIR__.'/../include/header.php'; 
+?>
 
 <div class="container leaderboard">
-    <nav class="main-nav">
-        <a href="/" class="nav-logo">
-            <img src="/assets/images/lion.png" alt="BrainRush Logo">
-        </a>
-        <div class="nav-links">
-            <a href="/quizz_solo">Solo</a>
-            <a href="/vs">1vs1</a>
-            <a href="/forum">Forum</a>
-            <a href="/compte">Mon Compte</a>
-            <?php if(isset($_SESSION['admin']) && $_SESSION['admin']): ?>
-                <a href="/admin/dashboard" class="admin-link">Admin</a>
-            <?php endif; ?>
-        </div>
-    </nav>
-
     <main class="leaderboard-content">
         <h1>Classement Général</h1>
         
         <div class="leaderboard-grid">
             <div class="top-players">
-                <?php for ($i = 0; $i < min(3, count($topPlayers)); $i++): ?>
+                <?php for ($i = 0; $i < min(3, count($topPlayers ?? [])); $i++): ?>
                 <div class="podium-item rank-<?= $i+1 ?>">
-                    <div class="avatar"><?= substr($topPlayers[$i]['username'], 0, 1) ?></div>
-                    <h3><?= htmlspecialchars($topPlayers[$i]['username']) ?></h3>
-                    <p><?= $topPlayers[$i]['score'] ?> pts</p>
+                    <div class="avatar"><?= substr($topPlayers[$i]['username'] ?? 'User', 0, 1) ?></div>
+                    <h3><?= htmlspecialchars($topPlayers[$i]['username'] ?? 'Joueur'.($i+1)) ?></h3>
+                    <p><?= $topPlayers[$i]['score'] ?? (1000-$i*100) ?> pts</p>
                 </div>
                 <?php endfor; ?>
             </div>
@@ -40,12 +30,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($topPlayers as $index => $player): ?>
+                    <?php 
+                    $defaultPlayers = [
+                        ['id' => 1, 'username' => 'Joueur1', 'score' => 1000, 'last_played' => date('Y-m-d'), 'avatar' => 'avatar_def1.png'],
+                        ['id' => 2, 'username' => 'Joueur2', 'score' => 900, 'last_played' => date('Y-m-d'), 'avatar' => 'lion.png'],
+                        ['id' => 3, 'username' => 'Joueur3', 'score' => 800, 'last_played' => date('Y-m-d'), 'avatar' => 'tigre.png']
+                    ];
+                    $playersToShow = $topPlayers ?? $defaultPlayers;
+                    ?>
+                    <?php foreach ($playersToShow as $index => $player): ?>
                     <tr class="<?= ($player['id'] === ($_SESSION['user_id'] ?? null)) ? 'current-user' : '' ?>">
                         <td><?= $index + 1 ?></td>
                         <td>
                             <span class="player-avatar">
-                                <img src="/assets/images/<?= htmlspecialchars($player['avatar']) ?>" alt="<?= htmlspecialchars($player['username']) ?>">
+                                <img src="<?= $baseUrl ?>/public/assets/images/<?= htmlspecialchars($player['avatar'] ?? 'avatar_def1.png') ?>" alt="<?= htmlspecialchars($player['username']) ?>">
                             </span>
                             <?= htmlspecialchars($player['username']) ?>
                         </td>
@@ -59,4 +57,7 @@
     </main>
 </div>
 
-<?php require_once __DIR__.'/../include/footer.php'; ?>
+<?php 
+$jsFiles = ['chatbot.js'];
+require_once __DIR__.'/../include/footer.php'; 
+?>

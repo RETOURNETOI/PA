@@ -1,64 +1,104 @@
 <?php
-require 'AdminController.php';
+require_once __DIR__.'/../../app/controller/admin_controller.php';
 AdminController::requireAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (isset($_POST['create'])) {
-    AdminController::createUser($_POST);
-  }
-  if (isset($_POST['update'])) {
-    AdminController::updateUser($_POST['id'], $_POST);
-  }
-  if (isset($_POST['delete'])) {
-    AdminController::deleteUser($_POST['id']);
-  }
-  header("Location: users.php");
-  exit;
+    $action = $_POST['action'] ?? '';
+    $userId = intval($_POST['user_id'] ?? 0);
+    
+    if ($userId > 0) {
+        switch($action) {
+            case 'ban':
+                AdminController::banUser($userId, $_POST['duration'] ?? '1 day');
+                break;
+            case 'unban':
+                AdminController::unbanUser($userId);
+                break;
+            case 'delete':
+                if ($userId !== $_SESSION['user_id']) {
+                    AdminController::deleteUser($userId);
+                }
+                break;
+        }
+    }
+    
+    header("Location: /BrainRush/BrainRush/admin/users");
+    exit;
 }
 
 $users = AdminController::listUsers();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des utilisateurs</title>
+    <link rel="stylesheet" href="/BrainRush/BrainRush/public/assets/CSS/admin.css">
+    <link rel="stylesheet" href="/BrainRush/BrainRush/public/assets/CSS/main.css">
+</head>
 <body>
-  <h1>Gérer les utilisateurs</h1>
+    <div class="admin-container">
+        <h1>Gestion des utilisateurs</h1>
 
-  <h2>Créer un nouvel utilisateur</h2>
-  <form method="post">
-    <input name="username" required placeholder="Nom">
-    <input name="email" required placeholder="Email">
-    <input name="password" required type="password" placeholder="Mot de passe">
-    <select name="role" required>
-      <option value="user">Utilisateur</option>
-      <option value="admin">Administrateur</option>
-    </select>
-    <button name="create">Créer</button>
-  </form>
+        <div class="users-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Pseudo</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($user['id']) ?></td>
+                        <td><?= htmlspecialchars($user['pseudo']) ?></td>
+                        <td><?= htmlspecialchars($user['email']) ?></td>
+                        <td><?= htmlspecialchars($user['role']) ?></td>
+                        <td>
+                            <?php if ($user['banned_until'] && strtotime($user['banned_until']) > time()): ?>
+                                <span class="status banned">Banni</span>
+                            <?php else: ?>
+                                <span class="status active">Actif</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <form method="post" style="display:inline">
+                                <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+                                
+                                <?php if ($user['banned_until'] && strtotime($user['banned_until']) > time()): ?>
+                                    <button name="action" value="unban" class="btn btn-success">Débannir</button>
+                                <?php else: ?>
+                                    <select name="duration">
+                                        <option value="1 hour">1 heure</option>
+                                        <option value="1 day">1 jour</option>
+                                        <option value="1 week">1 semaine</option>
+                                        <option value="1 month">1 mois</option>
+                                        <option value="permanent">Permanent</option>
+                                    </select>
+                                    <button name="action" value="ban" class="btn btn-warning">Bannir</button>
+                                <?php endif; ?>
+                                
+                                <?php if ($user['id'] !== $_SESSION['user_id']): ?>
+                                    <button name="action" value="delete" class="btn btn-danger" 
+                                            onclick="return confirm('Supprimer cet utilisateur ?')">Supprimer</button>
+                                <?php endif; ?>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
 
-  <h2>Liste des utilisateurs</h2>
-  <table border="1" cellpadding="5">
-    <tr><th>Nom</th><th>Email</th><th>Rôle</th><th>Actions</th></tr>
-    <?php foreach ($users as $u): ?>
-    <tr>
-      <td><?= htmlspecialchars($u['username']) ?></td>
-      <td><?= htmlspecialchars($u['email']) ?></td>
-      <td><?= htmlspecialchars($u['role']) ?></td>
-      <td>
-        <form method="post" style="display:inline">
-          <input type="hidden" name="id" value="<?= $u['id'] ?>">
-          <input name="username" value="<?= htmlspecialchars($u['username']) ?>">
-          <input name="email" value="<?= htmlspecialchars($u['email']) ?>">
-          <select name="role">
-            <option value="user" <?= $u['role'] === 'user' ? 'selected' : '' ?>>Utilisateur</option>
-            <option value="admin" <?= $u['role'] === 'admin' ? 'selected' : '' ?>>Administrateur</option>
-          </select>
-          <button name="update">Modifier</button>
-          <button name="delete" onclick="return confirm('Supprimer cet utilisateur ? Attention, vous ne pouvez pas supprimer votre propre compte.')">Supprimer</button>
-        </form>
-      </td>
-    </tr>
-    <?php endforeach; ?>
-  </table>
+        <div class="back-link">
+            <a href="/BrainRush/BrainRush/admin/dashboard" class="btn btn-primary">← Retour au tableau de bord</a>
+        </div>
+    </div>
 </body>
 </html>

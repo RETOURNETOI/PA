@@ -1,51 +1,82 @@
 <?php
-// Sources/app/include/header.php
-session_start();
-$baseUrl = '/BrainRush';
+if (!isset($basePath)) {
+    $basePath = '/BrainRush/BrainRush/public';
+}
+$baseUrl = '/BrainRush/BrainRush';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainRush - <?= $pageTitle ?? 'Jeu Quiz Éducatif' ?></title>
-    <link rel="stylesheet" href="<?= $baseUrl ?>/Sources/app/public/assets/CSS/main.css">
-    <?php if(isset($cssFiles)): ?>
-        <?php foreach($cssFiles as $cssFile): ?>
-            <link rel="stylesheet" href="<?= $baseUrl ?>/Sources/app/public/assets/CSS/<?= $cssFile ?>">
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <title><?= isset($pageTitle) ? htmlspecialchars($pageTitle) : 'BrainRush' ?></title>
+    
+    <link rel="stylesheet" href="<?= $basePath ?>/assets/CSS/main.css">
+    <?php
+    if (isset($cssFiles) && is_array($cssFiles)) {
+        foreach ($cssFiles as $css) {
+            echo '<link rel="stylesheet" href="'.$basePath.'/assets/CSS/'.$css.'">'."\n";
+        }
+    }
+    ?>
 </head>
 <body>
-    <header class="main-header">
-        <div class="container">
-            <a href="<?= $baseUrl ?>/" class="logo">
-                <img src="<?= $baseUrl ?>/Sources/app/public/assets/images/lion.png" alt="Logo BrainRush">
-                <span>BrainRush</span>
-            </a>
+    <nav class="custom-navbar">
+        <div class="navbar-container">
+            <a href="<?= $baseUrl ?>" class="navbar-brand">🧠 BrainRush</a>
             
-            <nav class="main-nav">
-                <a href="<?= $baseUrl ?>/quizz_solo">Solo</a>
-                <a href="<?= $baseUrl ?>/vs">1vs1</a>
-                <a href="<?= $baseUrl ?>/forum">Forum</a>
-                <?php if(isset($_SESSION['user_id'])): ?>
-                    <a href="<?= $baseUrl ?>/compte">Mon Compte</a>
-                    <a href="<?= $baseUrl ?>/logout">Déconnexion</a>
+            <ul class="navbar-links" id="navbar-menu">
+                <li><a href="<?= $baseUrl ?>/" id="navHome">Accueil</a></li>
+                <li><a href="<?= $baseUrl ?>/quizz_solo" id="navSolo">Solo</a></li>
+                <li><a href="<?= $baseUrl ?>/vs" id="navVS">VS</a></li>
+                <li><a href="<?= $baseUrl ?>/classement" id="navRank">Classement</a></li>
+                <li><a href="<?= $baseUrl ?>/forum" id="navForum">Forum</a></li>
+            </ul>
+            
+            <div class="navbar-actions">
+                <button id="langToggle" class="navbar-btn icon">
+                    <span id="langIcon">🇫🇷</span>
+                </button>
+                
+                <button id="themeToggle" class="navbar-btn icon">🌙</button>
+                
+                <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
+                    <a href="<?= $baseUrl ?>/compte" class="navbar-btn secondary">
+                        <?= htmlspecialchars($_SESSION['user_name']) ?>
+                    </a>
+                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
+                        <a href="<?= $baseUrl ?>/admin/dashboard" class="navbar-btn admin">Admin</a>
+                    <?php endif; ?>
+                    <a href="<?= $baseUrl ?>/auth/logout" class="navbar-btn">Déconnexion</a>
                 <?php else: ?>
-                    <a href="<?= $baseUrl ?>/auth/login">Connexion</a>
-                    <a href="<?= $baseUrl ?>/auth/register">Inscription</a>
+                    <a href="<?= $baseUrl ?>/auth/login" class="navbar-btn secondary" id="loginBtn">Se connecter</a>
+                    <a href="<?= $baseUrl ?>/auth/register" class="navbar-btn primary" id="signupBtn">S'inscrire</a>
                 <?php endif; ?>
-            </nav>
-            
-            <div class="language-switcher">
-                <button class="lang-btn" data-lang="fr">FR</button>
-                <button class="lang-btn" data-lang="en">EN</button>
             </div>
         </div>
-    </header>
+    </nav>
 
     <main class="main-content">
-        <div class="notification-icon">
-            <span id="notification-badge" class="hidden"></span>
-            <div id="notification-panel" class="hidden"></div>
+        <?php if (isset($_SESSION['message'])): ?>
+            <div class="alert alert-success">
+                <?= htmlspecialchars($_SESSION['message']) ?>
+                <?php unset($_SESSION['message']); ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-error">
+                <?= htmlspecialchars($_SESSION['error']) ?>
+                <?php unset($_SESSION['error']); ?>
+            </div>
+        <?php endif; ?>
+
+        <div id="chatbot-box" class="hidden">
+            <div id="chatbox" class="chatbox-content"></div>
+            <div class="chatbox-input">
+                <input type="text" id="userInput" placeholder="Écris ton message..." />
+            </div>
+            <button id="close-chatbot" class="close-chatbot">×</button>
         </div>
+
+        <button id="chatbot-icon" class="chatbot-open-button">💬</button>

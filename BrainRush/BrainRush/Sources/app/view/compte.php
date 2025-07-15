@@ -1,17 +1,19 @@
 <?php
 $pageTitle = "Mon Compte";
 $cssFiles = ['dashboard.css', 'chatbot.css'];
+$baseUrl = '/BrainRush/BrainRush';
 require_once __DIR__.'/../include/header.php';
 ?>
 
 <div class="account-container">
     <div class="profile-section">
         <div class="avatar">
-            <img src="/assets/images/avatar_def1.png" alt="Avatar">
+            <img src="<?= $baseUrl ?>/public/assets/images/avatar_def1.png" alt="Avatar">
         </div>
         <div class="profile-info">
-            <h1><?= htmlspecialchars($_SESSION['username'] ?? 'Utilisateur') ?></h1>
-            <p>Membre depuis : <?= date('d/m/Y', strtotime($_SESSION['created_at'] ?? 'now')) ?></p>
+            <h1><?= htmlspecialchars($_SESSION['user_name'] ?? 'Utilisateur') ?></h1>
+            <p>Email: <?= htmlspecialchars($_SESSION['user_email'] ?? 'Non défini') ?></p>
+            <p>Membre depuis : <?= date('d/m/Y') ?></p>
         </div>
     </div>
     
@@ -23,10 +25,18 @@ require_once __DIR__.'/../include/header.php';
                 <p><?= $_SESSION['games_played'] ?? 0 ?></p>
             </div>
             <div class="stat-card">
+                <h3>Score total</h3>
+                <p><?= $_SESSION['total_score'] ?? 0 ?></p>
+            </div>
+            <div class="stat-card">
                 <h3>Taux de réussite</h3>
                 <p><?= $_SESSION['win_rate'] ?? 0 ?>%</p>
             </div>
         </div>
+    </div>
+
+    <div class="actions-section">
+        <a href="<?= $baseUrl ?>/auth/logout" class="btn logout-button">Déconnexion</a>
     </div>
 </div>
 

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../controller/admin_controller.php';
+require_once __DIR__.'/../../app/controller/admin_controller.php';
 AdminController::requireAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    header("Location: moderation.php");
+    header("Location: /BrainRush/BrainRush/admin/moderation");
     exit;
 }
 
@@ -23,36 +23,42 @@ $pending = AdminController::getPendingPhotos();
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Modération des photos</title>
-  <link rel="stylesheet" href="../../public/assets/CSS/index.css">
-  <link rel="stylesheet" href="../../public/assets/CSS/main.css">
-  <link rel="stylesheet" href="../../public/assets/CSS/admin.css">
+    <meta charset="UTF-8">
+    <title>Modération des photos</title>
+    <link rel="stylesheet" href="/BrainRush/BrainRush/public/assets/CSS/admin.css">
+    <link rel="stylesheet" href="/BrainRush/BrainRush/public/assets/CSS/main.css">
 </head>
 <body>
-  <?php include __DIR__ . '/../../include/header_dashboard.php'; ?>
+    <div class="admin-container">
+        <h1>Modération des photos</h1>
 
-  <main class="container">
-    <h1>Modération des photos</h1>
+        <?php if (!empty($pending)): ?>
+            <div class="moderation-grid">
+                <?php foreach ($pending as $u): ?>
+                    <div class="moderation-card">
+                        <p><strong><?= htmlspecialchars($u['username'] ?? $u['pseudo'] ?? 'Utilisateur') ?></strong></p>
+                        <?php if (isset($u['photo']) && $u['photo']): ?>
+                            <img src="/BrainRush/BrainRush/public/uploads/<?= htmlspecialchars($u['photo']) ?>" height="120" alt="Photo à modérer">
+                        <?php else: ?>
+                            <div class="no-photo">Aucune photo</div>
+                        <?php endif; ?>
+                        <form method="post" class="moderation-actions">
+                            <input type="hidden" name="id" value="<?= (int) $u['id'] ?>">
+                            <button name="approve" class="btn btn-success">✔️ Approuver</button>
+                            <button name="reject" class="btn btn-danger">❌ Rejeter</button>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <div class="no-content">
+                <p>Aucune photo en attente de modération.</p>
+            </div>
+        <?php endif; ?>
 
-    <?php if (!empty($pending)): ?>
-      <?php foreach ($pending as $u): ?>
-        <div class="moderation-card">
-          <p><strong><?= htmlspecialchars($u['username']) ?></strong></p>
-          <img src="/uploads/<?= htmlspecialchars($u['photo']) ?>" height="80" alt="Photo à modérer">
-          <form method="post">
-            <input type="hidden" name="id" value="<?= (int) $u['id'] ?>">
-            <button name="approve">✔️ Approuver</button>
-            <button name="reject">❌ Rejeter</button>
-          </form>
+        <div class="back-link">
+            <a href="/BrainRush/BrainRush/admin/dashboard" class="btn btn-primary">← Retour au tableau de bord</a>
         </div>
-      <?php endforeach; ?>
-    <?php else: ?>
-      <p>Aucune photo en attente.</p>
-    <?php endif; ?>
-  </main>
-
-  <script src="../../public/assets/JS/index.js"></script>
-  <script src="../../public/assets/JS/main.js"></script>
+    </div>
 </body>
 </html>

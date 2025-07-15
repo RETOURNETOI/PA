@@ -1,17 +1,18 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Chemin de base pour MAMP si le document root est sur /public
-    RewriteBase /
+    RewriteBase /BrainRush/Sources/app/public/
 
-    # Redirige vers index.php si le fichier ou dossier n'existe pas
+    # Ne pas toucher aux fichiers ou dossiers existants
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
 
-    # Redirection HTTPS (optionnel — utile uniquement si ton MAMP est configuré en HTTPS)
-    RewriteCond %{HTTPS} off
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    # Rediriger tout vers index.php
+    RewriteRule ^ index.php [L,QSA]
+
+    # Redirection HTTPS si nécessaire (à activer si MAMP HTTPS)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
 # Bloque l'accès aux fichiers sensibles

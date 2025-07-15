@@ -2,5 +2,7 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: view/auth/login.php");
+
+// Redirection vers la route logique, pas vers un fichier physique
+header("Location: /auth/login");
 exit;

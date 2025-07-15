@@ -1,12 +1,13 @@
 <?php
 $pageTitle = "Inscription";
+$baseUrl = '/BrainRush'; // adapte selon ta config
 $cssFiles = ['auth.css', 'chatbot.css'];
 require_once __DIR__.'/../include/header.php';
 ?>
 
 <div class="auth-container">
     <h1>Inscription</h1>
-    <form action="/auth/register" method="POST">
+    <form action="<?= $baseUrl ?>/auth/register" method="POST">
         <div class="form-group">
             <label for="username">Pseudo</label>
             <input type="text" id="username" name="username" required>
@@ -25,7 +26,7 @@ require_once __DIR__.'/../include/header.php';
         </div>
         <button type="submit" class="btn">S'inscrire</button>
     </form>
-    <p>Déjà un compte ? <a href="/auth/login">Se connecter</a></p>
+    <p>Déjà un compte ? <a href="<?= $baseUrl ?>/auth/login">Se connecter</a></p>
 </div>
 
 <?php 

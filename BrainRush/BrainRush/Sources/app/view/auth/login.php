@@ -1,26 +1,52 @@
-<?php
-$pageTitle = "Connexion";
-$cssFiles = ['auth.css', 'chatbot.css'];
-require_once __DIR__.'/../include/header.php';
-?>
+<!-- Sources/admin/views/dashboard.php -->
+<?php require_once __DIR__.'/../../../app/include/header_dashboard.php'; ?>
 
-<div class="auth-container">
-    <h1>Connexion</h1>
-    <form action="/auth/login" method="POST">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+<div class="admin-container">
+    <h1>Tableau de bord administrateur</h1>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Utilisateurs total</h3>
+            <p><?= $data['total_users'] ?></p>
         </div>
-        <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" required>
+        
+        <div class="stat-card">
+            <h3>Utilisateurs actifs</h3>
+            <p><?= $data['active_users'] ?></p>
         </div>
-        <button type="submit" class="btn">Se connecter</button>
-    </form>
-    <p>Pas encore de compte ? <a href="/auth/register">S'inscrire</a></p>
+        
+        <div class="stat-card">
+            <h3>Visites aujourd'hui</h3>
+            <p><?= $data['today_visits'] ?></p>
+        </div>
+    </div>
+
+    <section class="reports-section">
+        <h2>Signalements en attente</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Contenu</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($data['reports'] as $report): ?>
+                <tr>
+                    <td><?= $report['id'] ?></td>
+                    <td><?= $report['content_type'] ?></td>
+                    <td><?= substr($report['content'], 0, 50) ?>...</td>
+                    <td>
+                        <!-- ✅ Lien de redirection déjà propre -->
+                        <a href="/admin/review/<?= $report['id'] ?>">Examiner</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </section>
 </div>
 
-<?php 
-$jsFiles = ['auth.js', 'chatbot.js'];
-require_once __DIR__.'/../include/footer.php';
-?>
+<?php require_once __DIR__.'/../../../app/include/footer.php'; ?>
