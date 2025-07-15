@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erreur 404</title>
+    <link rel="stylesheet" href="../public/assets/CSS/404.css">
+    <link rel="stylesheet" href="./CSS/main.css">
+    <link rel="stylesheet" href="./CSS/chatbot.css">
+        <link rel="stylesheet" href="./CSS/index.css">
+</head>
+<body>
+
+        <video autoplay loop muted class="video" src="./images/background_404.mp4" type="video/mp4"></video>
+        <div class="video-masque"></div>
+        <nav class="custom-navbar">
+      <div class="navbar-container">
+        <a href="index.html" class="navbar-brand">🧠 BrainRush</a>
+        
+        <ul class="navbar-links" id="navbar-menu">
+          <li><a href="index.html" id="navHome">Accueil</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=quizz_solo" id="navSolo">Solo</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=vs" id="navVS">VS</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=classement" id="navRank">Classement</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=tournois" id="navTournament">Tournois</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=forum" id="navForum">Forum</a></li>
+        </ul>
+        
+        <div class="navbar-actions">
+          <button id="langToggle" class="navbar-btn icon" title="Changer la langue">
+           <span id="langIcon">🇫🇷</span>
+          </button>
+          
+          <button id="themeToggle" class="navbar-btn icon" title="Changer le thème">
+            🌙
+          </button>
+          
+          <a href="connexion.html" class="navbar-btn secondary" id="loginBtn">
+            <span class="text">Se connecter</span>
+          </a>
+          
+          <a href="inscription.html" class="navbar-btn primary" id="signupBtn">
+            <span class="text">S'inscrire</span>
+          </a>
+          
+          <div href="compte.html" class="avatar-container">
+            <img src="./assets/avatar_def1.png" alt="Profil" class="avatar-icon">
+          </div>
+        </div>
+      </div>
+    </nav>
+
+<div class="principal">
+  <h1 id="error404Titre">Erreur 404</h1>
+  <h2 id="error404soustitre">Oups, cette page est introuvable</h2>
+  <a href="./public/index.html" class="btn-404" id="boutonAccueil">Retour à l'accueil</a>
+</div>
+
+
+    <script src="./JS/main.js"></script>
+    <script src="./JS/chatbot.js"></script>
+    <script src="./JS/index.js"></script>
+</body>
+</html>

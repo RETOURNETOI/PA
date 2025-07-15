@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="./CSS/main.css">
+    <link rel="stylesheet" href="./CSS/chatbot.css">
+        <link rel="stylesheet" href="./CSS/index.css">
+        <link rel="stylesheet" href="./CSS/forum.css">
+</head>
+<body>
+        <nav class="custom-navbar">
+      <div class="navbar-container">
+        <a href="index.html" class="navbar-brand">🧠 BrainRush</a>
+        
+        <ul class="navbar-links" id="navbar-menu">
+          <li><a href="index.html" id="navHome">Accueil</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=quizz_solo" id="navSolo">Solo</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=vs" id="navVS">VS</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=classement" id="navRank">Classement</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=tournois" id="navTournament">Tournois</a></li>
+          <li><a href="../traitement/routeur/routeur.php?page=forum" id="navForum">Forum</a></li>
+        </ul>
+        
+        <div class="navbar-actions">
+          <button id="langToggle" class="navbar-btn icon" title="Changer la langue">
+           <span id="langIcon">🇫🇷</span>
+          </button>
+          
+          <button id="themeToggle" class="navbar-btn icon" title="Changer le thème">
+            🌙
+          </button>
+          
+          <a href="connexion.html" class="navbar-btn secondary" id="loginBtn">
+            <span class="text">Se connecter</span>
+          </a>
+          
+          <a href="inscription.html" class="navbar-btn primary" id="signupBtn">
+            <span class="text">S'inscrire</span>
+          </a>
+          
+          <div href="compte.html" class="avatar-container">
+            <img src="./assets/avatar_def1.png" alt="Profil" class="avatar-icon">
+          </div>
+        </div>
+      </div>
+    </nav>
+
+<main class="carrer-forum">
+
+<h1 class="texte-centre"
+id="forum">Forum communautaire</h1>
+
+<form class="carte" id="formulaire-nouveau-post"><div class="corps-carte">
+<h3 class="titre-carte" id="creerpost">Créer un post</h3>
+<input placeholder="Titre du post" required class="champ-texte" id="champ-titre" type="text">
+<textarea id="champ-contenu" rows="4" required class="champ-texte" placeholder="Contenu du post"></textarea>
+<button type="submit" id="publier" class="btn btn-outline-primaire largeur-100">Publier</button>
+</div></form>
+
+<section class="mt" id="liste-publications">
+</section>
+
+</main>
+
+
+
+    <script src="./JS/main.js"></script>
+    <script src="./JS/chatbot.js"></script>
+    <script src="./JS/index.js"></script>
+        <script src="./JS/forum.js"></script>
+</body>
+</html>

@@ -1,10 +1,11 @@
 <?php
-require_once __DIR__.'/../controller/auth_controller.php';
-require_once __DIR__.'/../controller/admin_controller.php';
-require_once __DIR__.'/../controller/front_controller.php';
-require_once __DIR__.'/../controller/forum_controller.php';
-require_once __DIR__.'/../controller/vs_controller.php';
-require_once __DIR__.'/../controller/chat_controller.php';
+require_once __DIR__ . '/../controller/auth_controller.php';
+require_once __DIR__ . '/../controller/admin_controller.php';
+require_once __DIR__ . '/../controller/front_controller.php';
+require_once __DIR__ . '/../controller/forum_controller.php';
+require_once __DIR__ . '/../controller/vs_controller.php';
+require_once __DIR__ . '/../controller/chat_controller.php';
+require_once __DIR__ . '/../core/database.php';
 
 class Router {
     public function __construct() {
@@ -12,7 +13,7 @@ class Router {
     }
 
     private function route() {
-        $basePath = '/BrainRush/BrainRush';
+        $basePath = '/BrainRush/BrainRush/Sources';
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $path = substr($requestUri, strlen($basePath));
         $method = $_SERVER['REQUEST_METHOD'];
@@ -40,7 +41,7 @@ class Router {
     }
 
     private function serveAsset($path) {
-        $filePath = __DIR__.'/../../public'.$path;
+        $filePath = __DIR__ . '/../../public' . $path;
         if (file_exists($filePath)) {
             $mimeTypes = [
                 'css' => 'text/css',
@@ -54,7 +55,7 @@ class Router {
             ];
             $ext = pathinfo($path, PATHINFO_EXTENSION);
             if (isset($mimeTypes[$ext])) {
-                header('Content-Type: '.$mimeTypes[$ext]);
+                header('Content-Type: ' . $mimeTypes[$ext]);
             }
             readfile($filePath);
         } else {
@@ -65,8 +66,8 @@ class Router {
 
     private function handleAdmin($path, $method) {
         $admin = new AdminController();
-        
-        switch($path) {
+
+        switch ($path) {
             case '/admin':
             case '/admin/':
             case '/admin/dashboard':
@@ -76,7 +77,7 @@ class Router {
                 $admin->manageUsers();
                 break;
             case '/admin/moderation':
-                require_once __DIR__.'/../../admin/views/moderation.php';
+                require_once __DIR__ . '/../../admin/views/moderation.php';
                 break;
             case '/admin/reports':
                 $admin->manageReports();
@@ -89,21 +90,13 @@ class Router {
 
     private function handleAuth($path, $method) {
         $auth = new AuthController();
-        
-        switch($path) {
+
+        switch ($path) {
             case '/auth/login':
-                if ($method === 'GET') {
-                    $auth->showLogin();
-                } else {
-                    $auth->login();
-                }
+                $method === 'GET' ? $auth->showLogin() : $auth->login();
                 break;
             case '/auth/register':
-                if ($method === 'GET') {
-                    $auth->showRegister();
-                } else {
-                    $auth->register();
-                }
+                $method === 'GET' ? $auth->showRegister() : $auth->register();
                 break;
             case '/auth/logout':
                 $auth->logout();
@@ -122,8 +115,8 @@ class Router {
 
     private function handleForum($path, $method) {
         $forum = new ForumController();
-        
-        switch(true) {
+
+        switch (true) {
             case $path === '/forum':
             case $path === '/forum/':
                 $forum->index();
@@ -151,8 +144,8 @@ class Router {
 
     private function handleVS($path, $method) {
         $vs = new VSController();
-        
-        switch($path) {
+
+        switch ($path) {
             case '/vs':
             case '/vs/':
                 $vs->index();
@@ -189,8 +182,8 @@ class Router {
 
     private function handleChat($path, $method) {
         $chat = new ChatController();
-        
-        switch($path) {
+
+        switch ($path) {
             case '/chat/messages':
                 $chat->getNewMessages();
                 break;
@@ -203,7 +196,7 @@ class Router {
     }
 
     private function handleAPI($path, $method) {
-        switch($path) {
+        switch ($path) {
             case '/api/admin/live-stats':
                 $this->getLiveStats();
                 break;
@@ -221,10 +214,10 @@ class Router {
 
     private function handleFront($path, $method) {
         $front = new FrontController();
-        
-        switch($path) {
-            case '/':
+
+        switch ($path) {
             case '':
+            case '/':
                 $front->home();
                 break;
             case '/quizz_solo':
@@ -244,17 +237,16 @@ class Router {
     private function getLiveStats() {
         header('Content-Type: application/json');
         session_start();
-        
+
         if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
             echo json_encode(['error' => 'Unauthorized']);
             exit;
         }
 
-        $pdo = Connexion::getInstance();
-        
         $userCount = AdminController::getUserCount();
         $liveVisitors = AdminController::getLiveVisitors();
-        
+
+        $pdo = Connexion::getInstance();
         $stmt = $pdo->query("SELECT COUNT(*) FROM reports WHERE status = 'pending'");
         $pendingReports = $stmt->fetchColumn();
 
@@ -270,13 +262,13 @@ class Router {
     private function getReports() {
         header('Content-Type: application/json');
         session_start();
-        
+
         if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
             echo json_encode(['error' => 'Unauthorized']);
             exit;
         }
 
-        require_once __DIR__.'/../models/report_model.php';
+        require_once __DIR__ . '/../models/report_model.php';
         $reportModel = new ReportModel();
         $reports = $reportModel->getPendingReports();
 
@@ -287,12 +279,13 @@ class Router {
     private function getUnreadNotifications() {
         header('Content-Type: application/json');
         session_start();
-        
+
         if (!isset($_SESSION['user_id'])) {
             echo json_encode(['count' => 0]);
             exit;
         }
 
+        // TODO: Ajouter logique de récupération des notifications réelles
         echo json_encode(['count' => 0]);
         exit;
     }

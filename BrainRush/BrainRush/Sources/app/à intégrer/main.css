@@ -1,0 +1,242 @@
+:root {
+  --primary-color: #4f46e5;
+  --secondary-color: #7c3aed;
+  --navbar-primary: #4f46e5;
+  --navbar-secondary: #7c3aed;
+  --dark-orange: #c2410c;
+  --light-orange: #ea580c;
+}
+
+body.dark-mode {
+  --navbar-primary: #c2410c;
+  --navbar-secondary: #ea580c;
+  --primary-color: #c2410c;
+  --secondary-color: #ea580c;
+}
+
+.custom-navbar {
+  background: linear-gradient(135deg, var(--navbar-primary), var(--navbar-secondary));
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.navbar-brand {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.navbar-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+}
+
+.navbar-links li a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.navbar-links li a:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar-links li a.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-btn.icon {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.navbar-btn.icon:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.navbar-btn.secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar-btn.secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.navbar-btn.primary {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar-btn.primary:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.avatar-container:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.avatar-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+#langIcon {
+  font-size: 20px;
+  display: block;
+  line-height: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 1rem;
+  }
+  
+  .navbar-links {
+    display: none;
+  }
+  
+  .navbar-actions {
+    gap: 0.5rem;
+  }
+  
+  .navbar-btn .text {
+    display: none;
+  }
+  
+  .navbar-btn {
+    padding: 0.5rem;
+    min-width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-container {
+    padding: 0 0.5rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+}
+
+body {
+  padding-top: 80px;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 2px solid;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-outline-primary {
+  background-color: transparent;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.hidden {
+  display: none;
+}

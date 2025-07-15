@@ -1,0 +1,139 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 100px 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.conteneur-form {
+  margin: 0 20px;
+  width: 100%;
+}
+
+form {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+.colonne-gauche,
+.colonne-droite {
+  flex: 1;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.bouton-nav.danger {
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  margin-top: 16px;
+  text-decoration: none;
+}
+
+.bouton-nav.danger:hover {
+  background-color: #c0392b;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.bloc-mdp {
+  position: relative;
+}
+
+.bloc-mdp img {
+  width: 30px;
+  position: absolute;
+  right: 10px;
+  top: 36px;
+  cursor: pointer;
+}
+
+#aperçuPhoto {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: none;
+  margin-top: 10px;
+}
+
+.captcha {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  user-select: none; 
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none; 
+  font-family: 'Courier New', monospace;
+  letter-spacing: 6px;
+  text-shadow: 1px 1px 0 #aaa, -1px -1px 0 #fff;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #222;
+  color: #fff;
+  margin-top: 30px;
+  border-radius: 6px;
+}

@@ -1,0 +1,205 @@
+CREATE TABLE questions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  question TEXT NOT NULL,
+  option1 VARCHAR(255),
+  option2 VARCHAR(255),
+  option3 VARCHAR(255),
+  option4 VARCHAR(255),
+  answer VARCHAR(255)
+);
+
+CREATE TABLE scores (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  utilisateur VARCHAR(100) NOT NULL,
+  quiz_theme VARCHAR(50) NOT NULL,
+  score INT NOT NULL,
+  date_participation DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE DATABASE forum_brainrush DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE forum_brainrush;
+
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE reports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT NOT NULL,
+    reason TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+);
+
+CREATE TABLE utilisateurs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(255),
+    prenom VARCHAR(255),
+    email VARCHAR(255),
+    motdepasse VARCHAR(255),
+    genre VARCHAR(20),
+    age INT,
+    photo_profil VARCHAR(255)
+);
+
+ALTER TABLE utilisateurs ADD score INT DEFAULT 0;
+
+INSERT INTO questions (quiz_theme, question, option1, option2, option3, option4, answer)
+VALUES 
+('math', '5 x 3', '8', '15', '10', '20', '15'),
+('math', 'racine carrée de 81', '9', '8', '7', '6', '9'),
+('math', '11 x 12', '123', '132', '111', '143', '132'),
+('math', '132 - 150', '12', '-8', '-18', '-19', '-18'),
+('math', '53 x 11', '530', '553', '583', '543', '583'),
+('math', '14 + 27', '41', '42', '40', '43', '41'),
+('math', '25 x 4', '100', '90', '80', '110', '100'),
+('math', '120 ÷ 6', '20', '18', '22', '24', '20'),
+('math', '17 x 3', '51', '50', '48', '52', '51'),
+('math', '99 - 45', '54', '55', '56', '53', '54'),
+('math', '12 x 12', '144', '122', '132', '124', '144'),
+('math', '350 + 150', '400', '490', '500', '480', '500'),
+('math', '64 ÷ 8', '6', '7', '8', '9', '8'),
+('math', '11 x 9', '99', '98', '101', '91', '99'),
+('math', '100 - 37', '63', '64', '65', '66', '63'),
+('math', '18 + 24', '42', '40', '44', '46', '42'),
+('math', '72 ÷ 8', '8', '9', '10', '11', '9'),
+('math', '15 x 6', '90', '85', '95', '100', '90'),
+('math', '81 - 36', '45', '44', '46', '43', '45'),
+('math', '13 x 7', '91', '90', '89', '92', '91'),
+('math', 'Quel est le carré de 13 ?', '156', '169', '144', '133', '169');
+
+INSERT INTO questions (quiz_theme, question, option1, option2, option3, option4, answer)
+VALUES
+('biologie', 'Quel organe est responsable de la circulation sanguine ?', 'Poumons', 'Cœur', 'Foie', 'Rein', 'Cœur'),
+('biologie', 'Combien de chromosomes possède un humain ?', '23', '46', '44', '92', '46'),
+('biologie', 'Quel est le rôle des globules rouges ?', 'Combattre les virus', 'Transporter l’oxygène', 'Produire l’insuline', 'Digérer les graisses', 'Transporter l’oxygène'),
+('biologie', 'Quel est le plus grand organe du corps humain ?', 'Cerveau', 'Peau', 'Intestin', 'Foie', 'intestin'),
+('biologie', 'Comment s’appelle le processus par lequel les plantes fabriquent leur nourriture ?', 'Respiration', 'Photosynthèse', 'Fermentation', 'Digestion', 'Photosynthèse'),
+('biologie', 'Quel est le principal gaz utilisé par les plantes pour la photosynthèse ?', 'Oxygène', 'Dioxyde de carbone', 'Azote', 'Hydrogène', 'Dioxyde de carbone'),
+('biologie', 'Quel organe filtre le sang dans le corps humain ?', 'Poumons', 'Cœur', 'Reins', 'Estomac', 'Reins'),
+('biologie', 'Quel est le rôle des globules blancs ?', 'Transporter l’oxygène', 'Combattre les infections', 'Digérer les aliments', 'Produire des hormones', 'Combattre les infections'),
+('biologie', 'Où se déroule la photosynthèse ?', 'Feuille', 'Racine', 'Tige', 'Fleur', 'Feuille'),
+('biologie', 'Quel est le constituant principal des os ?', 'Fer', 'Calcium', 'Magnésium', 'Sodium', 'Calcium'),
+('biologie', 'Combien de lobes a le cerveau humain ?', '2', '3', '4', '5', '4'),
+('biologie', 'Quelle molécule porte l’information génétique ?', 'Protéine', 'ADN', 'ARN', 'Glucide', 'ADN'),
+('biologie', 'Quelle est la température corporelle normale en °C ?', '36.6', '37.0', '38.0', '35.5', '37.0'),
+('biologie', 'Où commence la digestion des aliments ?', 'Estomac', 'Bouche', 'Intestin', 'Œsophage', 'Bouche'),
+('biologie', 'Quelle partie de la cellule produit de l’énergie ?', 'Noyau', 'Mitochondrie', 'Ribosome', 'Cytoplasme', 'Mitochondrie'),
+('biologie', 'Quel organe produit l’insuline ?', 'Foie', 'Pancréas', 'Rein', 'Estomac', 'Pancréas'),
+('biologie', 'Qu’est-ce qu’un herbivore ?', 'Un carnivore', 'Un animal qui mange des plantes', 'Un omnivore', 'Un parasite', 'Un animal qui mange des plantes'),
+('biologie', 'Combien de dents possède un humain adulte normalement ?', '28', '30', '32', '36', '32'),
+('biologie', 'Quel est le rôle du système nerveux ?', 'Transporter le sang', 'Contrôler les fonctions du corps', 'Digérer les aliments', 'Filtrer les toxines', 'Contrôler les fonctions du corps'),
+('biologie', 'Quel est le nom de la couche qui protège la Terre des UV ?', 'Cuirasse', 'Ozone', 'Atmosphère', 'Stratosphère', 'Ozone'),
+('biologie', 'Quel organe stocke la bile ?', 'Estomac', 'Intestin grêle', 'Foie', 'Vésicule biliaire', 'Vésicule biliaire'),
+('biologie', 'Que sont les enzymes ?', 'Des hormones', 'Des protéines qui catalysent les réactions', 'Des cellules immunitaires', 'Des vitamines', 'Des protéines qui catalysent les réactions'),
+('biologie', 'Quel type de sang est donneur universel ?', 'A+', 'O-', 'AB+', 'B-', 'O-'),
+('biologie', 'Quel système contrôle les hormones ?', 'Digestif', 'Nerveux', 'Endocrinien', 'Respiratoire', 'Endocrinien'),
+('biologie', 'Combien de paires de chromosomes chez l’humain ?', '22', '23', '24', '21', '23'),
+('biologie', 'Quel est l’organe principal de la respiration ?', 'Cœur', 'Poumons', 'Foie', 'Reins', 'Poumons'),
+('biologie', 'Quelle cellule transporte l’oxygène ?', 'Globule rouge', 'Globule blanc', 'Plaquette', 'Neurone', 'Globule rouge'),
+('biologie', 'Quel est le rôle de l’estomac ?', 'Filtrer le sang', 'Produire des hormones', 'Digérer les aliments', 'Transporter l’oxygène', 'Digérer les aliments'),
+('biologie', 'Comment appelle-t-on la transformation d’une chenille en papillon ?', 'Mutation', 'Métamorphose', 'Reproduction', 'Croissance', 'Métamorphose'),
+('biologie', 'Quel est le rôle du foie ?', 'Pomper le sang', 'Détoxifier le corps', 'Produire des neurones', 'Contrôler la respiration', 'Détoxifier le corps');
+
+INSERT INTO questions (quiz_theme, question, option1, option2, option3, option4, answer)
+VALUES
+('manga', 'Quel est le rêve de Luffy dans One Piece ?', 'Devenir le roi des ninjas', 'Devenir Hokage', 'Devenir le roi des pirates', 'Être le plus fort au monde', 'Devenir le roi des pirates'),
+('manga', 'Dans quel manga trouve-t-on le personnage Naruto ?', 'One Piece', 'Bleach', 'Naruto', 'Dragon Ball', 'Naruto'),
+('manga', 'Qui est le rival de Naruto ?', 'Gon', 'Sasuke', 'Ichigo', 'Zoro', 'Sasuke'),
+('manga', 'Comment s’appelle l’épée d’Ichigo dans Bleach ?', 'Bankai', 'Zangetsu', 'Kusanagi', 'Rengoku', 'Zangetsu'),
+('manga', 'Quel est le nom du frère de Luffy ?', 'Zoro', 'Sabo', 'Ace', 'Shanks', 'Ace'),
+('manga', 'Quel aliment Luffy adore-t-il ?', 'Ramen', 'Viande', 'Sushi', 'Bento', 'Viande'),
+('manga', 'Qui est le créateur de Dragon Ball ?', 'Eiichiro Oda', 'Akira Toriyama', 'Masashi Kishimoto', 'Tite Kubo', 'Akira Toriyama'),
+('manga', 'Dans quel manga trouve-t-on les "Titans" ?', 'Naruto', 'One Punch Man', 'L’Attaque des Titans', 'Hunter x Hunter', 'L’Attaque des Titans'),
+('manga', 'Quel est le nom du titan principal dans Shingeki no Kyojin ?', 'Titan Bestial', 'Titan Colossal', 'Titan Assaillant', 'Titan Féminin', 'Titan Assaillant'),
+('manga', 'Quel personnage dit "Ore wa Monkey D. Luffy!" ?', 'Naruto', 'Luffy', 'Goku', 'Saitama', 'Luffy'),
+('manga', 'Quel est le pouvoir de Gon dans Hunter x Hunter ?', 'Ninjutsu', 'Nen', 'Ki', 'Bankai', 'Nen'),
+('manga', 'Quel est le nom de la guilde de Natsu dans Fairy Tail ?', 'Shadow Gear', 'Fairy Tail', 'Blue Pegasus', 'Phantom Lord', 'Fairy Tail'),
+('manga', 'Qui est le père de Gohan ?', 'Vegeta', 'Goku', 'Piccolo', 'Krillin', 'Goku'),
+('manga', 'Dans quel manga trouve-t-on "Saitama" ?', 'Bleach', 'One Punch Man', 'One Piece', 'Demon Slayer', 'One Punch Man'),
+('manga', 'Combien de Dragon Balls faut-il pour exaucer un vœu ?', '5', '6', '7', '9', '7'),
+('manga', 'Quel est le nom du démon dans Demon Slayer ?', 'Orochi', 'Muzan', 'Zabuza', 'Shigaraki', 'Muzan'),
+('manga', 'Quel est le prénom de Zoro dans One Piece ?', 'Roronoa', 'Kenpachi', 'Trafalgar', 'Kenshin', 'Roronoa'),
+('manga', 'Quel est le nom complet de Light dans Death Note ?', 'Light Yagami', 'Light Ayanami', 'Light Kamado', 'Light Uchiha', 'Light Yagami'),
+('manga', 'Quel objet permet d’écrire le nom des gens dans Death Note ?', 'Le Carnet Magique', 'Death Note', 'Grimoire', 'Livre Noir', 'Death Note'),
+('manga', 'Quel est le style de combat de Tanjiro ?', 'Souffle de la Lune', 'Souffle du Soleil', 'Souffle de l’Eau', 'Souffle du Feu', 'Souffle de l’Eau'),
+('manga', 'Quel est le meilleur ami de Gon ?', 'Hisoka', 'Killua', 'Kurapika', 'Leorio', 'Killua'),
+('manga', 'Quel est le nom de la technique ultime de Goku ?', 'Bankai', 'Rasengan', 'Kamehameha', 'Smash', 'Kamehameha'),
+('manga', 'Dans quel manga se déroule l’examen Chunin ?', 'Bleach', 'Dragon Ball', 'Naruto', 'Black Clover', 'Naruto'),
+('manga', 'Qui est le capitaine de la 6e division dans Bleach ?', 'Ichigo', 'Byakuya', 'Aizen', 'Hitsugaya', 'Byakuya'),
+('manga', 'Quel est le nom du bateau de Luffy ?', 'Going Merry', 'Sunny Gold', 'Red Line', 'Blue Whale', 'Going Merry'),
+('manga', 'Qui est le frère de Sabo et Ace ?', 'Naruto', 'Zoro', 'Luffy', 'Gon', 'Luffy'),
+('manga', 'Quelle est la couleur des cheveux de Goku ?', 'Rouge', 'Noir', 'Blond', 'Bleu', 'Noir'),
+('manga', 'Quel manga a pour héros un détective et un dieu de la mort ?', 'Naruto', 'Death Note', 'Bleach', 'Detective Conan', 'Death Note'),
+('manga', 'Dans quel manga trouve-t-on le "Nen" ?', 'Naruto', 'Bleach', 'Hunter x Hunter', 'Jujutsu Kaisen', 'Hunter x Hunter'),
+('manga', 'Quel est le nom de la sœur de Tanjiro ?', 'Mikasa', 'Hinata', 'Nezuko', 'Sakura', 'Nezuko');
+
+
+INSERT INTO questions (quiz_theme, question, option1, option2, option3, option4, answer)
+VALUES
+('physique', 'Quelle est l’unité de la force ?', 'Joule', 'Newton', 'Watt', 'Pascal', 'Newton'),
+('physique', 'Quelle est la formule de la vitesse ?', 'v = m / t', 'v = d / t', 'v = t / d', 'v = f × m', 'v = d / t'),
+('physique', 'Que mesure un thermomètre ?', 'Le poids', 'La température', 'La pression', 'La vitesse', 'La température'),
+('physique', 'Quelle est l’unité de la puissance ?', 'Newton', 'Watt', 'Joule', 'Volt', 'Watt'),
+('physique', 'Que produit un aimant ?', 'Chaleur', 'Lumière', 'Champ magnétique', 'Électricité', 'Champ magnétique'),
+('physique', 'Que mesure un voltmètre ?', 'La température', 'La vitesse', 'La tension', 'Le courant', 'La tension'),
+('physique', 'Quelle est la planète la plus proche du Soleil ?', 'Terre', 'Vénus', 'Mars', 'Mercure', 'Mercure'),
+('physique', 'Quelle est l’unité de la pression ?', 'Joule', 'Watt', 'Pascal', 'Ampère', 'Pascal'),
+('physique', 'Quelle est la formule de l’énergie cinétique ?', 'Ec = ½mv²', 'Ec = mgh', 'Ec = m/v', 'Ec = mv', 'Ec = ½mv²'),
+('physique', 'Qu’est-ce qu’une ampère mesure ?', 'La température', 'L’intensité du courant', 'La résistance', 'La pression', 'L’intensité du courant'),
+('physique', 'Quel est l’effet d’une force sur un objet ?', 'Il change sa température', 'Il change sa vitesse ou sa forme', 'Il le rend plus lourd', 'Il le colore', 'Il change sa vitesse ou sa forme'),
+('physique', 'Que fait un corps en chute libre ?', 'Il monte', 'Il tombe avec une vitesse constante', 'Il accélère', 'Il s’arrête', 'Il accélère'),
+('physique', 'Quel est le symbole de la tension ?', 'U', 'I', 'R', 'V', 'U'),
+('physique', 'Quel est le symbole de la résistance ?', 'R', 'U', 'V', 'I', 'R'),
+('physique', 'Comment appelle-t-on un changement de liquide à gaz ?', 'Fusion', 'Évaporation', 'Condensation', 'Solidification', 'Évaporation'),
+('physique', 'Quelle est l’unité de l’énergie ?', 'Joule', 'Watt', 'Ampère', 'Pascal', 'Joule'),
+('physique', 'Quel est l’appareil utilisé pour mesurer la masse ?', 'Thermomètre', 'Voltmètre', 'Balance', 'Chronomètre', 'Balance'),
+('physique', 'Quel est l’état de l’eau à 100 °C ?', 'Solide', 'Liquide', 'Gaz', 'Plasma', 'Gaz'),
+('physique', 'Qu’est-ce que la gravité ?', 'Une force électrique', 'Une force magnétique', 'Une force d’attraction', 'Une force nucléaire', 'Une force d’attraction'),
+('physique', 'À quoi sert un générateur ?', 'À éclairer', 'À chauffer', 'À produire de l’électricité', 'À mesurer la température', 'À produire de l’électricité'),
+('physique', 'Quelle est la vitesse approximative de la lumière ?', '300 000 km/s', '150 000 km/s', '100 000 km/s', '500 000 km/s', '300 000 km/s'),
+('physique', 'Un objet flottant dans l’eau est...', 'plus dense que l’eau', 'moins dense que l’eau', 'chauffé', 'électrifié', 'moins dense que l’eau'),
+('physique', 'Quel appareil mesure le temps ?', 'Balance', 'Montre', 'Thermomètre', 'Chronomètre', 'Chronomètre'),
+('physique', 'Comment appelle-t-on un changement de solide à liquide ?', 'Sublimation', 'Fusion', 'Condensation', 'Évaporation', 'Fusion'),
+('physique', 'Quel gaz est essentiel à la combustion ?', 'CO2', 'Hélium', 'Oxygène', 'Azote', 'Oxygène'),
+('physique', 'Quel est le symbole de la vitesse ?', 'd', 'v', 't', 'm', 'v'),
+('physique', 'Quelle force nous maintient sur Terre ?', 'Électricité', 'Gravité', 'Pression', 'Inertie', 'Gravité'),
+('physique', 'Quel phénomène permet aux avions de voler ?', 'Magnétisme', 'Flottabilité', 'Portance', 'Gravité', 'Portance'),
+('physique', 'Quelle transformation subit l’eau qui gèle ?', 'Condensation', 'Évaporation', 'Solidification', 'Fusion', 'Solidification'),
+('physique', 'Quel est l’état physique du Soleil ?', 'Solide', 'Liquide', 'Gaz', 'Plasma', 'Plasma');
+
+INSERT INTO questions (quiz_theme, question, option1, option2, option3, option4, answer)
+VALUES
+('jeuxvideo', 'Quel personnage principal incarne-t-on dans la série The Legend of Zelda ?', 'Zelda', 'Link', 'Ganondorf', 'Sheik', 'Link'),
+('jeuxvideo', 'Dans quel jeu trouve-t-on le mode "Battle Royale" le plus populaire ?', 'Call of Duty', 'Fortnite', 'Minecraft', 'Overwatch', 'Fortnite'),
+('jeuxvideo', 'Quel est le nom du plombier célèbre de Nintendo ?', 'Luigi', 'Mario', 'Toad', 'Bowser', 'Mario'),
+('jeuxvideo', 'Dans quel jeu faut-il attraper des créatures appelées Pokémon ?', 'Digimon', 'Monster Hunter', 'Pokémon', 'Zelda', 'Pokémon'),
+('jeuxvideo', 'Quel est le nom du jeu où le joueur construit librement avec des blocs ?', 'Terraria', 'Roblox', 'Minecraft', 'Portal', 'Minecraft'),
+('jeuxvideo', 'Dans quel jeu incarne-t-on Kratos ?', 'Dark Souls', 'God of War', 'Elden Ring', 'Assassin’s Creed', 'God of War'),
+('jeuxvideo', 'Quel héros utilise un grappin dans Just Cause ?', 'Nathan Drake', 'Rico Rodriguez', 'Lara Croft', 'Max Payne', 'Rico Rodriguez'),
+('jeuxvideo', 'Quel est le but principal de Pac-Man ?', 'Manger des fantômes', 'Fuir les fantômes', 'Manger des pastilles', 'Sortir du labyrinthe', 'Manger des pastilles'),
+('jeuxvideo', 'Dans quel jeu affronte-t-on des creepers ?', 'Roblox', 'Minecraft', 'Terraria', 'Garry’s Mod', 'Minecraft'),
+('jeuxvideo', 'Quel est le nom du monde principal dans Mario ?', 'Dream Land', 'Kanto', 'Champignon', 'Hyrule', 'Champignon'),
+('jeuxvideo', 'Quel est le nom du personnage principal de Halo ?', 'Cortana', 'Master Chief', 'Noble Six', 'Spartan Locke', 'Master Chief'),
+('jeuxvideo', 'Quel est le nom du jeu où l’on cuisine à plusieurs en coop ?', 'Cook It', 'Kitchen Mayhem', 'Overcooked', 'Chef Wars', 'Overcooked'),
+('jeuxvideo', 'Dans quel jeu joue-t-on à cache-cache avec des imposteurs ?', 'Among Us', 'Fall Guys', 'Phasmophobia', 'Rust', 'Among Us'),
+('jeuxvideo', 'Dans quel jeu utilise-t-on des portails pour se déplacer ?', 'Half-Life', 'Portal', 'DOOM', 'Destiny', 'Portal'),
+('jeuxvideo', 'Quelle est la couleur principale de Sonic ?', 'Rouge', 'Bleu', 'Vert', 'Noir', 'Bleu'),
+('jeuxvideo', 'Quel jeu est centré sur la survie et les zombies ?', 'Minecraft', 'The Last of Us', 'Fortnite', 'Pokémon', 'The Last of Us'),
+('jeuxvideo', 'Dans quel jeu conduit-on des karts avec des objets à lancer ?', 'Crash Bandicoot', 'Sonic Racing', 'Mario Kart', 'F-Zero', 'Mario Kart'),
+('jeuxvideo', 'Quel est le nom de l’adversaire principal de Mario ?', 'Donkey Kong', 'Koopa', 'Bowser', 'Wario', 'Bowser'),
+('jeuxvideo', 'Quelle société a créé la PlayStation ?', 'Nintendo', 'Sony', 'Microsoft', 'Sega', 'Sony'),
+('jeuxvideo', 'Quelle franchise de jeu se déroule dans Tamriel ?', 'The Witcher', 'Skyrim', 'Dark Souls', 'Assassin’s Creed', 'Skyrim'),
+('jeuxvideo', 'Dans quel jeu combat-on des boss nommés "Colosses" ?', 'Dark Souls', 'God of War', 'Shadow of the Colossus', 'Elden Ring', 'Shadow of the Colossus'),
+('jeuxvideo', 'Dans quel jeu dirige-t-on une ferme ?', 'Minecraft', 'Stardew Valley', 'Overcooked', 'Zelda', 'Stardew Valley'),
+('jeuxvideo', 'Quel est le nom du skin le plus emblématique de Fortnite ?', 'Banana', 'Peely', 'Fishstick', 'Jonesy', 'Peely'),
+('jeuxvideo', 'Quel héros utilise un bras mécanique dans Sekiro ?', 'Genichiro', 'Isshin', 'Sekiro', 'Jin', 'Sekiro'),
+('jeuxvideo', 'Quel est le nom du jeu où tu poses des tuiles pour construire des villes ?', 'Carcassonne', 'Cities Skylines', 'SimCity', 'Minecraft', 'Carcassonne'),
+('jeuxvideo', 'Dans quel jeu trouve-t-on la map "Dust II" ?', 'Overwatch', 'Valorant', 'CS:GO', 'Rainbow Six', 'CS:GO'),
+('jeuxvideo', 'Quelle est la spécialité de Kirby ?', 'Voler', 'Courir', 'Avaler et copier', 'Tirer', 'Avaler et copier'),
+('jeuxvideo', 'Quel est le nom du jeu de tir post-apocalyptique développé par Bethesda ?', 'Fallout', 'Metro', 'Stalker', 'Far Cry', 'Fallout'),
+('jeuxvideo', 'Quel est le but du jeu Tetris ?', 'Tirer sur les blocs', 'Empiler des blocs', 'Faire disparaître les lignes', 'Construire une tour', 'Faire disparaître les lignes'),
+('jeuxvideo', 'Dans quel jeu peut-on capturer des monstres et les faire combattre ?', 'Pokémon', 'Digimon World', 'Monster Rancher', 'All of them', 'Pokémon');

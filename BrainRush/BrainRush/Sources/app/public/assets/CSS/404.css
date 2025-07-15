@@ -1,0 +1,66 @@
+.video {
+position: fixed;
+top: 0; left: 0;
+width: 100vw; height: 100vh;
+object-fit: cover;
+z-index: -1;
+}
+
+.video-masque {
+position: fixed;
+top: 0; left: 0;
+width: 100vw; height: 100vh;
+background: rgba(0, 0, 0, 0.5);
+z-index: -1;
+}
+
+h1 {
+padding: 2rem;
+font-size: 4rem;
+font-family: 'jellee', sans-serif;
+text-shadow: 2px 2px 10px rgba(0,0,0,.7);
+}
+
+h2 {
+font-family: 'jellee', sans-serif;
+margin-top: 1rem;
+}
+
+.principal {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 1;
+text-align: center;
+color: white;
+}
+
+
+.btn-404 {
+display: inline-block;
+margin-top: 2rem;
+padding: .75rem 1.5rem;
+font-size: 1.1rem;
+font-weight: 600;
+color: #fff;
+background-color: var(--primary-color);
+border: none;
+border-radius: 8px;
+text-decoration: none;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+transition: all .3s ease;
+}
+
+.btn-404:hover {
+background-color: var(--secondary-color);
+transform: translateY(-2px);
+box-shadow: 0 6px 15px rgba(0,0,0,.3);
+}
+
+@font-face {
+  font-family: 'jellee';
+  src: url('../Jellee_1223/WEB/Jellee-Bold.eot') format('eot'),
+       url('../Jellee_1223/WEB/Jellee-Bold.woff') format('woff'),
+       url('../Jellee_1223/WEB/Jellee-Bold.woff2') format('woff2');
+}

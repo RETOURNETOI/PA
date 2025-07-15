@@ -1,0 +1,50 @@
+body {
+    font-family: sans-serif;
+    background-color: #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.boite {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+.boite h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.champ {
+    margin-top: 10px;
+}
+.champ label {
+    display: block;
+    font-weight: bold;
+}
+.champ input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.bouton {
+    margin-top: 20px;
+}
+.bouton button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+body.dark-mode .champ-texte {
+background:#2c2c2c;
+color:#eee;border-color:#444}
